@@ -29,15 +29,17 @@ public class player : MonoBehaviour
     {
         if(groundcheck())
         {
-            movement();
+            
             jump();
         }
-        
+        movement();
+
     }
 
     private bool groundcheck()
     {
-        if (Physics2D.Raycast(grounpos.position, Vector2.down * raylength, groundlayer))
+        RaycastHit2D hit = Physics2D.Raycast(grounpos.position, Vector2.down,raylength);
+        if (hit)
         {
             grounded = true;
             Debug.Log(Physics2D.Raycast(grounpos.position, Vector2.down * raylength, groundlayer).collider.name);
