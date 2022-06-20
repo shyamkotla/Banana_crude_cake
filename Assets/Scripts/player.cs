@@ -20,7 +20,6 @@ public class player : MonoBehaviour
     void Start()
     {
         grounded = false;
-        //transform.position = new Vector3(0, 0, 0);
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -29,13 +28,14 @@ public class player : MonoBehaviour
     {
         if(groundcheck())
         {
-            
             jump();
         }
         movement();
 
-    }
 
+
+    }
+    
     private bool groundcheck()
     {
         RaycastHit2D hit = Physics2D.Raycast(grounpos.position, Vector2.down,raylength);
@@ -51,10 +51,10 @@ public class player : MonoBehaviour
             return false;
         }
     }
-    private void OnDrawGizmos()
-    {
-        Debug.DrawRay(grounpos.position, Vector2.down * raylength);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Debug.DrawRay(grounpos.position, Vector2.down * raylength);
+    //}
     private void jump()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -62,11 +62,6 @@ public class player : MonoBehaviour
             rb.AddForce(Vector2.up * _Jumpspeed, ForceMode2D.Impulse);
         }
     }
-    //private void OnDrawGizmos()
-    //{
-    //    Debug.DrawRay(transform.position, new Vector3(0f, raylength, 0f));
-    //}
-
     private void movement()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
