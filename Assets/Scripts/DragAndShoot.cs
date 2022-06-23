@@ -6,12 +6,14 @@ public class DragAndShoot : MonoBehaviour
 {
     [SerializeField] private Vector2 startPos;
     [SerializeField] private Vector2 dragPos;
+
     [SerializeField] private Vector2 endPos;
     [SerializeField] private float maxForce;
     [SerializeField] private float currentForce;
     [SerializeField] int linepoints;
     [SerializeField] Transform aimer;
     [SerializeField] Transform dragger;
+    [SerializeField] Transform starterPos;
     [SerializeField] Projection projection;
     //[SerializeField] LineRenderer lr;
     [SerializeField] private Rigidbody2D rb;
@@ -41,33 +43,45 @@ public class DragAndShoot : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             projection.lr.enabled = true;
+            aimer.gameObject.SetActive(true);
+            dragger.gameObject.SetActive(true);
+            starterPos.gameObject.SetActive(true);
+
+            startPos = camRef.ScreenToWorldPoint(Input.mousePosition); // A vector
+            starterPos.position = startPos;
         }
         if (Input.GetMouseButton(0))
         {
             dragPos = camRef.ScreenToWorldPoint(Input.mousePosition);
-            dragger.position = dragPos; // B vector
-            startPos = transform.position; // A vector
+            dragger.position = dragPos;
+            dir = dragPos - startPos;
+
+            aimer.position = (Vector2)transform.position - dir;
 
 
-            dir = dragPos - startPos; // dir vector
+            forcedir = aimer.position - transform.position;
+            
 
-            aimer.position = startPos - dir;// mirror of dir vector
+            
 
-            forcedir = aimer.position - transform.position;// force dir from player local pos
+            //forcedir = aimer.position - transform.position;// force dir from player local pos
 
             projection.SimulateTrajectory(transform.position, forcedir, maxForce);
         }
         if (Input.GetMouseButtonUp(0))
         {
+            aimer.gameObject.SetActive(false);
+            dragger.gameObject.SetActive(false);
+            starterPos.gameObject.SetActive(false);
+
             projection.lr.enabled = false;
 
-            startPos = transform.position;
 
-            endPos = camRef.ScreenToWorldPoint(Input.mousePosition);
-            dir = endPos - startPos;
-            aimer.position = startPos - dir;
-
+            dragPos = camRef.ScreenToWorldPoint(Input.mousePosition);
+            dir = dragPos - startPos;
+            aimer.position = (Vector2)transform.position - dir;
             forcedir = aimer.position - transform.position;
+
 
             rb.velocity = forcedir * maxForce;
            
