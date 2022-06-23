@@ -503,7 +503,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1916618299, guid: 8c60bac4955840a4ab36c00fcbba42f6, type: 3}
       propertyPath: maxForce
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1916618299, guid: 8c60bac4955840a4ab36c00fcbba42f6, type: 3}
       propertyPath: projection
@@ -613,7 +613,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1177,5 +1177,9 @@ PrefabInstance:
       propertyPath: obstaclesParent
       value: 
       objectReference: {fileID: 928795816}
+    - target: {fileID: 3594642562014803831, guid: ddc256349b604d24ab19f84df0e51608, type: 3}
+      propertyPath: maxFrameIterations
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddc256349b604d24ab19f84df0e51608, type: 3}

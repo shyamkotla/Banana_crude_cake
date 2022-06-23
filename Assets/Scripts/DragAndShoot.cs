@@ -18,93 +18,59 @@ public class DragAndShoot : MonoBehaviour
     private Vector2 dir;
     private Camera camRef;
     private Vector2 forcedir;
-    private bool mouseClicked;
-    public bool isGhost;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //lr = GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody2D>();
         camRef = Camera.main;
-        //lr.positionCount = linepoints;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //Cursor.lockState = CursorLockMode.Locked;
+        MousInput();
+
     }
-    
-    private void OnMouseDown()
+
+    private void MousInput()
     {
-        
-        projection.lr.enabled = true;
-        //aimer.gameObject.SetActive(true);
-        //dragger.gameObject.SetActive(true);
+        if (Input.GetMouseButtonDown(0))
+        {
+            projection.lr.enabled = true;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            dragPos = camRef.ScreenToWorldPoint(Input.mousePosition);
+            dragger.position = dragPos; // B vector
+            startPos = transform.position; // A vector
 
 
+            dir = dragPos - startPos; // dir vector
+
+            aimer.position = startPos - dir;// mirror of dir vector
+
+            forcedir = aimer.position - transform.position;// force dir from player local pos
+
+            projection.SimulateTrajectory(transform.position, forcedir, maxForce);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            projection.lr.enabled = false;
+
+            startPos = transform.position;
+
+            endPos = camRef.ScreenToWorldPoint(Input.mousePosition);
+            dir = endPos - startPos;
+            aimer.position = startPos - dir;
+
+            forcedir = aimer.position - transform.position;
+
+            rb.velocity = forcedir * maxForce;
+           
+        }
     }
-    private void OnMouseDrag()
-    {
-       
-        dragPos = camRef.ScreenToWorldPoint(Input.mousePosition);
-        dragger.position = dragPos; // B vector
-        startPos = transform.position; // A vector
-
-
-        dir = dragPos - startPos; // dir vector
-
-        aimer.position = startPos - dir;// mirror of dir vector
-
-        forcedir = aimer.position - transform.position;// force dir from player local pos
-
-        //var newdir = forcedir.normalized;
-        //Debug.Log(newdir);
-        projection.SimulateTrajectory(transform.position,forcedir,maxForce);
-    }
-    private void OnMouseUp()
-    {
-        projection.lr.enabled = false;
-        //aimer.gameObject.SetActive(false);
-        //dragger.gameObject.SetActive(false);
-
-        startPos = transform.position;
-
-        endPos = camRef.ScreenToWorldPoint(Input.mousePosition);
-        dir = endPos - startPos;
-        aimer.position = startPos - dir;
-        
-        forcedir = aimer.position - transform.position;
-        
-        rb.velocity =  forcedir* maxForce;
-        //rb.AddForce(forcedir.normalized * maxForce, ForceMode2D.Impulse);
-       
-        
-        //lr.enabled = false;
-        mouseClicked = false;
-
-        //Debug.Log(aimer.position);
-
-    }
-
-    //void DrawProjectile()
-    //{
-    //    for(int i=0;i<lr.positionCount;i++)
-    //    {
-    //        var eachpos = CurrentPos(i * 0.1f);
-    //        lr.SetPosition(i,new Vector3(eachpos.x,eachpos.y,0));
-    //    }
-    //}
-
-    //Vector2 CurrentPos(float t)
-    //{
-    //    // s = ut+1/2at2
-    //    // s(displacement) => p1(current)-p0(starting)
-    //    // p1 = p0 + ut+1/2at2
-    //    var currentpos = (Vector2)transform.position + (forcedir.normalized * maxForce * t) + (0.5f * Physics2D.gravity * t * t);
-    //    return currentpos;
-    //}
 }
