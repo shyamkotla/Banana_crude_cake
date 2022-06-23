@@ -8,7 +8,7 @@ public class DragAndShoot : MonoBehaviour
     [SerializeField] private Vector2 dragPos;
 
     [SerializeField] private Vector2 endPos;
-    [SerializeField] private float maxForce;
+    [SerializeField] public float maxForce;
     [SerializeField] private float currentForce;
     [SerializeField] int linepoints;
     [SerializeField] Transform aimer;
