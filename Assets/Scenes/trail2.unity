@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 357255005}
   - component: {fileID: 357255004}
   m_Layer: 0
-  m_Name: Square (6)
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +165,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 357255002}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7175832fcfa37fb44b54313e51ae908b, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 522626527}
   - component: {fileID: 522626526}
   m_Layer: 0
-  m_Name: Square (1)
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -261,7 +261,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 522626525}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 945b3bf68c855954a8d9afe0230f7968, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -338,8 +338,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522626525}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.2411995, y: -8.93, z: 10}
-  m_LocalScale: {x: 33.029457, y: 0.656, z: 1}
+  m_LocalPosition: {x: -6.2604, y: -8.93, z: 10}
+  m_LocalScale: {x: 33.112072, y: 0.656, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 928795816}
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 1080406206}
   - component: {fileID: 1080406205}
   m_Layer: 0
-  m_Name: Square (4)
+  m_Name: roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -503,7 +503,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1916618299, guid: 8c60bac4955840a4ab36c00fcbba42f6, type: 3}
       propertyPath: maxForce
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1916618299, guid: 8c60bac4955840a4ab36c00fcbba42f6, type: 3}
       propertyPath: projection
@@ -1008,7 +1008,7 @@ GameObject:
   - component: {fileID: 1952011305}
   - component: {fileID: 1952011304}
   m_Layer: 0
-  m_Name: Square (5)
+  m_Name: wall2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1038,7 +1038,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1952011302}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7175832fcfa37fb44b54313e51ae908b, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
