@@ -7,77 +7,104 @@ public class DragAndShoot : MonoBehaviour
     [SerializeField] private Vector2 startPos;
     [SerializeField] private Vector2 dragPos;
     [SerializeField] private Vector2 endPos;
-    [SerializeField] private float force;
+    [SerializeField] private float maxForce;
+    [SerializeField] private float currentForce;
+    [SerializeField] int linepoints;
     [SerializeField] Transform aimer;
     [SerializeField] Transform dragger;
-    [SerializeField] LineRenderer lr;
-    Rigidbody2D rb;
-    Vector2 dir;
-    Camera camRef;
-    float angle;
+    [SerializeField] Projection projection;
+    //[SerializeField] LineRenderer lr;
+    [SerializeField] private Rigidbody2D rb;
+    private Vector2 dir;
+    private Camera camRef;
+    private Vector2 forcedir;
+    private bool mouseClicked;
+    public bool isGhost;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        lr = GetComponent<LineRenderer>();
+        //lr = GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody2D>();
         camRef = Camera.main;
-
+        //lr.positionCount = linepoints;
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        
     }
     
     private void OnMouseDown()
     {
         
-        aimer.gameObject.SetActive(true);
-        dragger.gameObject.SetActive(true);
-        Debug.Log("started");
-        lr.SetPosition(0, transform.position);
+        projection.lr.enabled = true;
+        //aimer.gameObject.SetActive(true);
+        //dragger.gameObject.SetActive(true);
+
 
     }
     private void OnMouseDrag()
     {
-        lr.enabled = true;
+       
         dragPos = camRef.ScreenToWorldPoint(Input.mousePosition);
         dragger.position = dragPos; // B vector
         startPos = transform.position; // A vector
 
-        lr.SetPosition(1, aimer.position);// linerenderer
 
         dir = dragPos - startPos; // dir vector
 
         aimer.position = startPos - dir;// mirror of dir vector
 
-        angle = Vector2.Angle(aimer.position.normalized, Vector2.right);
-        Debug.Log(angle);
+        forcedir = aimer.position - transform.position;// force dir from player local pos
+
+        //var newdir = forcedir.normalized;
+        //Debug.Log(newdir);
+        projection.SimulateTrajectory(transform.position,forcedir,maxForce);
     }
     private void OnMouseUp()
     {
-        aimer.gameObject.SetActive(false);
-        dragger.gameObject.SetActive(false);
+        projection.lr.enabled = false;
+        //aimer.gameObject.SetActive(false);
+        //dragger.gameObject.SetActive(false);
 
         startPos = transform.position;
 
         endPos = camRef.ScreenToWorldPoint(Input.mousePosition);
         dir = endPos - startPos;
-        var newdirection = startPos - dir;
-        aimer.position = newdirection;
-        newdirection.Normalize();
-
-
-        var forcedir = aimer.position - transform.position;
+        aimer.position = startPos - dir;
+        
+        forcedir = aimer.position - transform.position;
+        
+        rb.velocity =  forcedir* maxForce;
+        //rb.AddForce(forcedir.normalized * maxForce, ForceMode2D.Impulse);
        
         
+        //lr.enabled = false;
+        mouseClicked = false;
 
-       rb.AddForce(forcedir/**force*/, ForceMode2D.Impulse);
-        
-        lr.enabled = false;
         //Debug.Log(aimer.position);
 
     }
+
+    //void DrawProjectile()
+    //{
+    //    for(int i=0;i<lr.positionCount;i++)
+    //    {
+    //        var eachpos = CurrentPos(i * 0.1f);
+    //        lr.SetPosition(i,new Vector3(eachpos.x,eachpos.y,0));
+    //    }
+    //}
+
+    //Vector2 CurrentPos(float t)
+    //{
+    //    // s = ut+1/2at2
+    //    // s(displacement) => p1(current)-p0(starting)
+    //    // p1 = p0 + ut+1/2at2
+    //    var currentpos = (Vector2)transform.position + (forcedir.normalized * maxForce * t) + (0.5f * Physics2D.gravity * t * t);
+    //    return currentpos;
+    //}
 }
