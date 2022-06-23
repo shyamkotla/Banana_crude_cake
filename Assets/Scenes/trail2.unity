@@ -501,6 +501,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1916618295, guid: 8c60bac4955840a4ab36c00fcbba42f6, type: 3}
+      propertyPath: m_Mass
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1916618295, guid: 8c60bac4955840a4ab36c00fcbba42f6, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 8cef0a46612ab4f419dfa839c98a47e8, type: 2}
     - target: {fileID: 1916618299, guid: 8c60bac4955840a4ab36c00fcbba42f6, type: 3}
       propertyPath: maxForce
       value: 2
