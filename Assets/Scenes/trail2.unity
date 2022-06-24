@@ -21787,7 +21787,7 @@ MonoBehaviour:
   startPos: {x: 0, y: 0}
   dragPos: {x: 0, y: 0}
   endPos: {x: 0, y: 0}
-  maxForce: 2
+  maxForce: 1
   currentForce: 0
   linepoints: 10
   aimer: {fileID: 1680767774}
@@ -61935,7 +61935,7 @@ PrefabInstance:
       objectReference: {fileID: 928795816}
     - target: {fileID: 3594642562014803831, guid: ddc256349b604d24ab19f84df0e51608, type: 3}
       propertyPath: maxFrameIterations
-      value: 100
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddc256349b604d24ab19f84df0e51608, type: 3}
