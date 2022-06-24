@@ -15,11 +15,12 @@ public class DragAndShoot : MonoBehaviour
     [SerializeField] Transform dragger;
     [SerializeField] Transform starterPos;
     [SerializeField] Projection projection;
+    [SerializeField] Animator anim;
     //[SerializeField] LineRenderer lr;
     [SerializeField] private Rigidbody2D rb;
     private Vector2 dir;
     private Camera camRef;
-    private Vector2 forcedir;
+    public Vector2 forcedir;
 
 
     // Start is called before the first frame update
@@ -58,14 +59,8 @@ public class DragAndShoot : MonoBehaviour
 
             aimer.position = (Vector2)transform.position - dir;
 
-
             forcedir = aimer.position - transform.position;
-            
-
-            
-
-            //forcedir = aimer.position - transform.position;// force dir from player local pos
-
+            forcedir = new Vector2(Mathf.Clamp(forcedir.x, -maxForce, maxForce), Mathf.Clamp(forcedir.y, -maxForce, maxForce));
             projection.SimulateTrajectory(transform.position, forcedir, maxForce);
         }
         if (Input.GetMouseButtonUp(0))
@@ -79,10 +74,13 @@ public class DragAndShoot : MonoBehaviour
 
             dragPos = camRef.ScreenToWorldPoint(Input.mousePosition);
             dir = dragPos - startPos;
+
             aimer.position = (Vector2)transform.position - dir;
+            
             forcedir = aimer.position - transform.position;
+            forcedir = new Vector2(Mathf.Clamp(forcedir.x, -maxForce, maxForce), Mathf.Clamp(forcedir.y, -maxForce, maxForce));
 
-
+            anim.SetTrigger("shoot");
             rb.velocity = forcedir * maxForce;
            
         }

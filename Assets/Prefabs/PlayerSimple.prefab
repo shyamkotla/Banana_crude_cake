@@ -213,9 +213,8 @@ GameObject:
   - component: {fileID: 1916618295}
   - component: {fileID: 1916618303}
   - component: {fileID: 1916618296}
-  - component: {fileID: 1916618299}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerSimple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,7 +297,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4105205230113730928}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78bcca61aff2bb2439735eb55c1ecc85, type: 3}
   m_Name: 
@@ -347,7 +346,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4105205230113730928}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c574600c11dc9bf45b73308f82fe1b18, type: 3}
   m_Name: 
@@ -360,26 +359,3 @@ MonoBehaviour:
   groundlayer:
     serializedVersion: 2
     m_Bits: 8
---- !u!114 &1916618299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4105205230113730928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23f54d3b012cf0d4cafec0419e27224e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPos: {x: 0, y: 0}
-  dragPos: {x: 0, y: 0}
-  endPos: {x: 0, y: 0}
-  maxForce: 5
-  currentForce: 0
-  linepoints: 10
-  aimer: {fileID: 665624016}
-  dragger: {fileID: 560655730}
-  projection: {fileID: 0}
-  rb: {fileID: 0}
-  isGhost: 0
