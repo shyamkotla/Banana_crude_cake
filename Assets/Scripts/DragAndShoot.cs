@@ -21,26 +21,46 @@ public class DragAndShoot : MonoBehaviour
     private Vector2 dir;
     private Camera camRef;
     public Vector2 forcedir;
-
+    SpriteRenderer spr;
+    bool inputdone;
+    bool firstbouncedone;
+    
+    [SerializeField] Color ActiveColor;
+    [SerializeField] Color NotActiveColor;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         camRef = Camera.main;
+        spr = GetComponent<SpriteRenderer>();
+        
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
-        MousInput();
+        if(firstbouncedone == true)
+        {
+            spr.color = ActiveColor;
+            //Cursor.lockState = CursorLockMode.Locked;
+            MousInput();
+        }
+        else
+        {
+            Debug.Log("input not allowed");
+            spr.color = NotActiveColor;
+
+        }
+        
+        
 
     }
 
     private void MousInput()
     {
+        
         if (Input.GetMouseButtonDown(0))
         {
             projection.lr.enabled = true;
@@ -82,7 +102,16 @@ public class DragAndShoot : MonoBehaviour
 
             anim.SetTrigger("shoot");
             rb.velocity = forcedir * maxForce;
-           
+
+            firstbouncedone = false;
         }
     }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        firstbouncedone = true;
+    }
+    //private void OnCollisionExit2D(Collision2D other)
+    //{
+    //    firstbouncedone = false;
+    //}
 }
