@@ -23,7 +23,7 @@ public class DragAndShoot : MonoBehaviour
     public Vector2 forcedir;
     SpriteRenderer spr;
     bool inputdone;
-    bool firstbouncedone;
+    bool readyToBounce;
     
     [SerializeField] Color ActiveColor;
     [SerializeField] Color NotActiveColor;
@@ -41,19 +41,28 @@ public class DragAndShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(firstbouncedone == true)
+        if(readyToBounce == true)
         {
+            anim.SetTrigger("ground");
+
             spr.color = ActiveColor;
             //Cursor.lockState = CursorLockMode.Locked;
             MousInput();
         }
         else
         {
-            Debug.Log("input not allowed");
             spr.color = NotActiveColor;
 
         }
-        
+        if (rb.velocity.y > 2f)
+        {
+            anim.SetTrigger("up");
+        }
+        else if (rb.velocity.y <-2f)
+        {
+            anim.SetTrigger("down");
+
+        }
         
 
     }
@@ -63,6 +72,8 @@ public class DragAndShoot : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
+            anim.SetTrigger("aim");
+
             projection.lr.enabled = true;
             aimer.gameObject.SetActive(true);
             dragger.gameObject.SetActive(true);
@@ -81,6 +92,19 @@ public class DragAndShoot : MonoBehaviour
 
             forcedir = aimer.position - transform.position;
             forcedir = new Vector2(Mathf.Clamp(forcedir.x, -maxForce, maxForce), Mathf.Clamp(forcedir.y, -maxForce, maxForce));
+
+            //flip sprite while aiming
+            if (Vector2.Dot(Vector2.right, forcedir) < 0)
+            {
+                spr.flipX = true;
+            }
+            else
+            {
+                spr.flipX = false;
+
+            }
+
+            //Debug.Log(Vector2.Dot(Vector2.right, forcedir));
             projection.SimulateTrajectory(transform.position, forcedir, maxForce);
         }
         if (Input.GetMouseButtonUp(0))
@@ -100,15 +124,14 @@ public class DragAndShoot : MonoBehaviour
             forcedir = aimer.position - transform.position;
             forcedir = new Vector2(Mathf.Clamp(forcedir.x, -maxForce, maxForce), Mathf.Clamp(forcedir.y, -maxForce, maxForce));
 
-            anim.SetTrigger("shoot");
             rb.velocity = forcedir * maxForce;
 
-            firstbouncedone = false;
+            readyToBounce = false;
         }
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        firstbouncedone = true;
+        readyToBounce = true;
     }
     //private void OnCollisionExit2D(Collision2D other)
     //{

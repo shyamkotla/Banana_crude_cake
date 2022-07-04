@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: eb703965aa21de44f9dca5bfdc6e38c5
+guid: e7ed364802722ee4c9cb344887ba86c0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: slimeidle_0
+      name: slimejump_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 200
         width: 236
-        height: 400
+        height: 260
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20d87f3812769b04db321bf47282ccf0
-      internalID: 1084295677
+      spriteID: 1659858760e72cc4b85aefbf16efee24
+      internalID: 1567400053
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeidle_1
+      name: slimejump_1
       rect:
         serializedVersion: 2
-        x: 237
-        y: 0
+        x: 236
+        y: 200
         width: 236
-        height: 400
+        height: 260
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2cc4203d6ff330747bb748779400207c
-      internalID: 2146974662
+      spriteID: c815b22ebb5cadd4aa0be5f590f1407f
+      internalID: -1623781996
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeidle_2
+      name: slimejump_2
       rect:
         serializedVersion: 2
         x: 472
-        y: 0
+        y: 200
         width: 236
-        height: 400
+        height: 260
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 733aea6c932408b43bb7a17f4f9360c2
-      internalID: -204612271
+      spriteID: 7d3ff6c7701a44442aa440847b085884
+      internalID: 157422321
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeidle_3
+      name: slimejump_3
       rect:
         serializedVersion: 2
         x: 708
-        y: 0
+        y: 200
         width: 236
-        height: 400
+        height: 260
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e4e714e46d74164d9f9f8073e2923bf
-      internalID: -235742002
+      spriteID: 53a572f5a169e464fb2632d007624d04
+      internalID: -469202784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeidle_4
+      name: slimejump_4
       rect:
         serializedVersion: 2
-        x: 945
-        y: 0
+        x: 944
+        y: 200
         width: 236
-        height: 400
+        height: 260
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,20 +214,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fcf4f7d89e2200440998e473f4ef0324
-      internalID: -2065992827
+      spriteID: a33123167abe2db4b906a4bebbef915e
+      internalID: -202730887
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeidle_5
+      name: slimejump_5
       rect:
         serializedVersion: 2
-        x: 1181
-        y: 0
+        x: 1180
+        y: 200
         width: 236
-        height: 400
+        height: 260
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,20 +235,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8de7fba84b9f213459b1acca27ed37e7
-      internalID: 2049453127
+      spriteID: 4efc8d75a149c1f4fa4b1f60bb98aa58
+      internalID: 1411566846
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeidle_6
+      name: slimejump_6
       rect:
         serializedVersion: 2
         x: 1416
-        y: 0
+        y: 200
         width: 236
-        height: 400
+        height: 260
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,20 +256,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f12af146221dc554ea56547365e486a7
-      internalID: -1554633247
+      spriteID: e9aac436792c0ce4cb9d531db5b4f009
+      internalID: -1079667402
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeidle_7
+      name: slimejump_7
       rect:
         serializedVersion: 2
         x: 1652
-        y: 0
+        y: 200
         width: 236
-        height: 400
+        height: 260
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -277,8 +277,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 800f34e229ff2bd4eb0826b30dfc8856
-      internalID: 1306180428
+      spriteID: 9595ce8682305514a91dacc4c153e933
+      internalID: 1438467499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slimejump_8
+      rect:
+        serializedVersion: 2
+        x: 1888
+        y: 200
+        width: 236
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00119f8ab0b1ca24db9a37cf4a1dba33
+      internalID: -91290706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slimejump_9
+      rect:
+        serializedVersion: 2
+        x: 1891
+        y: 2
+        width: 234
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f18909719d1c564bb55400140051c4d
+      internalID: 9042129
       vertices: []
       indices: 
       edges: []
@@ -294,14 +336,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      slimeidle_0: 1084295677
-      slimeidle_7: 1306180428
-      slimeidle_5: 2049453127
-      slimeidle_3: -235742002
-      slimeidle_6: -1554633247
-      slimeidle_2: -204612271
-      slimeidle_4: -2065992827
-      slimeidle_1: 2146974662
+      slimejump_0: 1567400053
+      slimejump_8: -91290706
+      slimejump_1: -1623781996
+      slimejump_7: 1438467499
+      slimejump_2: 157422321
+      slimejump_9: 9042129
+      slimejump_3: -469202784
+      slimejump_5: 1411566846
+      slimejump_4: -202730887
+      slimejump_6: -1079667402
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: eb703965aa21de44f9dca5bfdc6e38c5
+guid: 1e21e5ad557272f47a1330719878ae37
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: slimeidle_0
+      name: slimeflydown_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 236
-        height: 400
+        height: 270
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20d87f3812769b04db321bf47282ccf0
-      internalID: 1084295677
+      spriteID: c3c60ade268c29343b76353afb0a21ea
+      internalID: -1596278306
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeidle_1
+      name: slimeflydown_1
       rect:
         serializedVersion: 2
-        x: 237
+        x: 236
         y: 0
         width: 236
-        height: 400
+        height: 270
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2cc4203d6ff330747bb748779400207c
-      internalID: 2146974662
+      spriteID: f756e93e71a62884cb10a9e9383edf1c
+      internalID: -835781493
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeidle_2
+      name: slimeflydown_2
       rect:
         serializedVersion: 2
         x: 472
         y: 0
         width: 236
-        height: 400
+        height: 270
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 733aea6c932408b43bb7a17f4f9360c2
-      internalID: -204612271
+      spriteID: cba4dedb9eabfc4468806a1d13d1883b
+      internalID: -175478198
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeidle_3
+      name: slimeflydown_3
       rect:
         serializedVersion: 2
         x: 708
         y: 0
         width: 236
-        height: 400
+        height: 270
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e4e714e46d74164d9f9f8073e2923bf
-      internalID: -235742002
+      spriteID: b2d51141034aa244ea42216af6a00694
+      internalID: -1647645194
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeidle_4
+      name: slimeflydown_4
       rect:
         serializedVersion: 2
-        x: 945
+        x: 944
         y: 0
         width: 236
-        height: 400
+        height: 270
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,71 +214,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fcf4f7d89e2200440998e473f4ef0324
-      internalID: -2065992827
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: slimeidle_5
-      rect:
-        serializedVersion: 2
-        x: 1181
-        y: 0
-        width: 236
-        height: 400
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8de7fba84b9f213459b1acca27ed37e7
-      internalID: 2049453127
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: slimeidle_6
-      rect:
-        serializedVersion: 2
-        x: 1416
-        y: 0
-        width: 236
-        height: 400
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f12af146221dc554ea56547365e486a7
-      internalID: -1554633247
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: slimeidle_7
-      rect:
-        serializedVersion: 2
-        x: 1652
-        y: 0
-        width: 236
-        height: 400
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 800f34e229ff2bd4eb0826b30dfc8856
-      internalID: 1306180428
+      spriteID: d2f5c6479c9b8cd49a4fae762e469fb2
+      internalID: -857935881
       vertices: []
       indices: 
       edges: []
@@ -294,14 +231,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      slimeidle_0: 1084295677
-      slimeidle_7: 1306180428
-      slimeidle_5: 2049453127
-      slimeidle_3: -235742002
-      slimeidle_6: -1554633247
-      slimeidle_2: -204612271
-      slimeidle_4: -2065992827
-      slimeidle_1: 2146974662
+      slimeflydown_1: -835781493
+      slimeflydown_3: -1647645194
+      slimeflydown_4: -857935881
+      slimeflydown_0: -1596278306
+      slimeflydown_2: -175478198
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
