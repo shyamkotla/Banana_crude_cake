@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class DragAndShoot : MonoBehaviour
 {
-    [SerializeField] private Vector2 startPos;
-    [SerializeField] private Vector2 dragPos;
-
-    [SerializeField] private Vector2 endPos;
+     private Vector2 startPos;
+     private Vector2 dragPos;
+     private Vector2 endPos;
     [SerializeField] public float maxForce;
     [SerializeField] private float currentForce;
     [SerializeField] int linepoints;
@@ -15,33 +14,47 @@ public class DragAndShoot : MonoBehaviour
     [SerializeField] Transform dragger;
     [SerializeField] Transform starterPos;
     [SerializeField] Projection projection;
-    [SerializeField] Animator anim;
     //[SerializeField] LineRenderer lr;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] PhysicsMaterial2D playerPhyMaterial;
     private Vector2 dir;
     private Camera camRef;
     public Vector2 forcedir;
-    SpriteRenderer spr;
+    [Header("Visual")]
+    [SerializeField] Animator anim;
+    [SerializeField] SpriteRenderer spr;
+    [SerializeField] Transform visualRef;
     bool inputdone;
     bool readyToBounce;
     
+    public enum PlayerState
+    {
+        IDLE,
+        AIMING,
+        LAUNCHED,
+        FIRSTBOUNCE,
+        SECONDBOUNCE
+    }
+    public PlayerState playerState;
     [SerializeField] Color ActiveColor;
     [SerializeField] Color NotActiveColor;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerState = PlayerState.IDLE;
         rb = GetComponent<Rigidbody2D>();
         camRef = Camera.main;
-        spr = GetComponent<SpriteRenderer>();
-        
+
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(readyToBounce == true)
+
+        
+        if (readyToBounce == true)
         {
             anim.SetTrigger("ground");
 
@@ -61,7 +74,7 @@ public class DragAndShoot : MonoBehaviour
         else if (rb.velocity.y <-2f)
         {
             anim.SetTrigger("down");
-
+            
         }
         
 
@@ -72,8 +85,11 @@ public class DragAndShoot : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
-            anim.SetTrigger("aim");
 
+
+            playerState = PlayerState.AIMING;
+
+            anim.SetTrigger("aim");
             projection.lr.enabled = true;
             aimer.gameObject.SetActive(true);
             dragger.gameObject.SetActive(true);
@@ -109,6 +125,7 @@ public class DragAndShoot : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
+            playerState = PlayerState.LAUNCHED;
             aimer.gameObject.SetActive(false);
             dragger.gameObject.SetActive(false);
             starterPos.gameObject.SetActive(false);
@@ -131,10 +148,31 @@ public class DragAndShoot : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
+
         readyToBounce = true;
+        if(playerState == PlayerState.LAUNCHED)
+        {
+
+            playerState = PlayerState.FIRSTBOUNCE;
+        }
+        else if(playerState == PlayerState.FIRSTBOUNCE)
+        {
+            rb.velocity = Vector2.zero;
+            //var dum = visualRef.transform.rotation.eulerAngles;
+            //Debug.Log(visualRef.Rotate(Vector3.zero,Space.World);
+            visualRef.Rotate(Vector3.zero, Space.World);
+            playerState = PlayerState.SECONDBOUNCE;
+            
+        }
+        
+
     }
-    //private void OnCollisionExit2D(Collision2D other)
-    //{
-    //    firstbouncedone = false;
-    //}
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (playerState == PlayerState.SECONDBOUNCE)
+        {
+            rb.velocity = Vector2.zero;
+
+        }
+    }
 }
