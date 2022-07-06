@@ -8,7 +8,7 @@ public class PlayerInput : MonoBehaviour
     private Vector2 dragPos;
     private Vector2 endPos;
     private Vector2 dir;
-    public Vector2 forcedir;
+    private Vector2 forcedir;
     [Header("DragandShoot")]
     [SerializeField] public float maxForce;
     [SerializeField] int linepoints;
@@ -16,7 +16,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] Transform dragger;
     [SerializeField] Transform starterPos;
     [SerializeField] Projection projection;
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
     private Camera camRef;
     private CollisionCheck collisonCheck;
     private PlayerAnimation playerAnimation;
