@@ -7,7 +7,7 @@ namespace Alpha
     public class OptionMenu : MonoBehaviour
     {
         #region Variables
-        [SerializeField] DragAndShoot dragAndShoot;
+        [SerializeField] PlayerInput dragAndShoot;
         [SerializeField] PhysicsMaterial2D playerphymat;
         [SerializeField] Slider forceSlider;
         [SerializeField] Slider bouncySlider;
