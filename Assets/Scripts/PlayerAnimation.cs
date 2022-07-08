@@ -1,15 +1,24 @@
 using UnityEngine;
+using Baracuda.Monitoring;
 
-public class PlayerAnimation : MonoBehaviour
+public class PlayerAnimation : MonitoredBehaviour
 {
     #region Variables
     [SerializeField] public Animator animator;
     PlayerInput playerinput;
     CollisionCheck collisonCheck;
     Rigidbody2D rb;
+    [Monitor]
+    private Vector2 velocity => rb.velocity;
+
     #endregion
 
     #region UnityMethods
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
     void Start()
     {
         playerinput = GetComponent<PlayerInput>();
@@ -26,7 +35,6 @@ public class PlayerAnimation : MonoBehaviour
 
         if (playerinput.playerState == PlayerInput.PlayerState.FIRSTBOUNCE)
         {
-            animator.ResetTrigger("down");
             animator.SetTrigger("ground");
         }
     }
@@ -36,20 +44,24 @@ public class PlayerAnimation : MonoBehaviour
         if (rb.velocity.y > 0f)
         {
             animator.ResetTrigger("aim");
-            animator.SetTrigger("up");
+            animator.SetBool("vel",true);
             
         }
         else if (rb.velocity.y < 0f)
         {
-            animator.ResetTrigger("up");
-            animator.SetTrigger("down");
+            animator.SetBool("vel",false);
 
         }
     }
     #endregion
 
     #region PublicMethods
+    public void SetAimTrigger()
+    {
+        animator.ResetTrigger("ground");
+        animator.SetTrigger("aim");
 
+    }
     #endregion
 
     #region PrivateMethods

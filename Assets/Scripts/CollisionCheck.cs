@@ -10,6 +10,7 @@ public class CollisionCheck : MonoBehaviour
     [SerializeField] Color ActiveColor;
     [SerializeField] Color NotActiveColor;
     public bool readyToBounce;
+    
     #endregion
 
     #region UnityMethods
