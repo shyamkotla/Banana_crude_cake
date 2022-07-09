@@ -60,14 +60,14 @@ public class CollisionCheck : MonoBehaviour
 
 
     }
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (dragAndShoot.playerState == PlayerInput.PlayerState.SECONDBOUNCE)
-        {
-            rb.velocity = Vector2.zero;
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    if (dragAndShoot.playerState == PlayerInput.PlayerState.SECONDBOUNCE)
+    //    {
+    //        rb.velocity = Vector2.zero;
 
-        }
-    }
+    //    }
+    //}
 
     #endregion
 

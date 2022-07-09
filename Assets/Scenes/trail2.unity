@@ -62306,6 +62306,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1659374524}
     - target: {fileID: 1449771113057561428, guid: 07b321f4e922ad6479c8778ead099998, type: 3}
+      propertyPath: maxForce
+      value: 3.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449771113057561428, guid: 07b321f4e922ad6479c8778ead099998, type: 3}
       propertyPath: projection
       value: 
       objectReference: {fileID: 1996061166}

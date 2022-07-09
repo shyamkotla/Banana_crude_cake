@@ -58,7 +58,7 @@ public class PlayerInput : MonoBehaviour
 
             playerState = PlayerState.AIMING;
 
-            playerAnimation.animator.SetTrigger("aim");
+            playerAnimation.SetAimTrigger();
             projection.lr.enabled = true;
             aimer.gameObject.SetActive(true);
             dragger.gameObject.SetActive(true);

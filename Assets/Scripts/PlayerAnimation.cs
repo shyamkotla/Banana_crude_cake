@@ -32,10 +32,15 @@ public class PlayerAnimation : MonitoredBehaviour
         {
             CheckVelocity();
         }
-
-        if (playerinput.playerState == PlayerInput.PlayerState.FIRSTBOUNCE)
+        else if (playerinput.playerState == PlayerInput.PlayerState.FIRSTBOUNCE)
         {
+            animator.SetTrigger("roll");
+        }
+        else if(playerinput.playerState == PlayerInput.PlayerState.SECONDBOUNCE)
+        {
+            animator.ResetTrigger("roll");
             animator.SetTrigger("ground");
+
         }
     }
 
