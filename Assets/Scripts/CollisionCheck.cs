@@ -4,19 +4,19 @@ using UnityEngine;
 public class CollisionCheck : MonoBehaviour
 {
     #region Variables
-    PlayerInput dragAndShoot;
+    PlayerInput playerInput;
     Rigidbody2D rb;
     [SerializeField] SpriteRenderer spr;
     [SerializeField] Color ActiveColor;
     [SerializeField] Color NotActiveColor;
     public bool readyToBounce;
-    
+
     #endregion
 
     #region UnityMethods
     void Start()
     {
-        dragAndShoot = GetComponent<PlayerInput>();
+        playerInput = GetComponent<PlayerInput>();
         rb = rb = GetComponent<Rigidbody2D>();
 
     }
@@ -40,11 +40,11 @@ public class CollisionCheck : MonoBehaviour
 
         readyToBounce = true;
         SetSpriteColor(true);
-        if (dragAndShoot.playerState == PlayerInput.PlayerState.LAUNCHED)
+        if (playerInput.playerState == PlayerInput.PlayerState.LAUNCHED || playerInput.playerState == PlayerInput.PlayerState.IDLE)
         {
-            dragAndShoot.playerState = PlayerInput.PlayerState.FIRSTBOUNCE;
+            playerInput.playerState = PlayerInput.PlayerState.FIRSTBOUNCE;
         }
-        else if (dragAndShoot.playerState == PlayerInput.PlayerState.FIRSTBOUNCE)
+        else if (playerInput.playerState == PlayerInput.PlayerState.FIRSTBOUNCE)
         {
             //reset velocity
             rb.velocity = Vector2.zero;
@@ -54,7 +54,7 @@ public class CollisionCheck : MonoBehaviour
             transform.rotation = Quaternion.Euler(Vector3.zero);
 
             //change state
-            dragAndShoot.playerState = PlayerInput.PlayerState.SECONDBOUNCE;
+            playerInput.playerState = PlayerInput.PlayerState.SECONDBOUNCE;
 
         }
 

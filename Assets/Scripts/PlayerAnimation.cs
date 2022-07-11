@@ -28,7 +28,7 @@ public class PlayerAnimation : MonitoredBehaviour
 
     void Update()
     {
-        if (playerinput.playerState == PlayerInput.PlayerState.LAUNCHED)
+        if (playerinput.playerState == PlayerInput.PlayerState.LAUNCHED || playerinput.playerState == PlayerInput.PlayerState.IDLE)
         {
             CheckVelocity();
         }
