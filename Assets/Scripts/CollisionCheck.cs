@@ -31,10 +31,11 @@ public class CollisionCheck : MonoBehaviour
         spr.color = state ? ActiveColor : NotActiveColor;
 
     }
-    public void FlipSprite(Vector2 aimDirection)
+    public void FlipSprite(bool state)
     {
-        spr.flipX = Vector2.Dot(Vector2.right, aimDirection) < 0 ? true : false;
+        spr.flipX = state;
     }
+    
     private void OnCollisionEnter2D(Collision2D other)
     {
 
