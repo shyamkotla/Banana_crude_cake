@@ -26,15 +26,7 @@ public class CollisionCheck : MonoBehaviour
 
     }
 
-    public void SetSpriteColor(bool state)
-    {
-        spr.color = state ? ActiveColor : NotActiveColor;
-
-    }
-    public void FlipSprite(Vector2 aimDirection)
-    {
-        spr.flipX = Vector2.Dot(Vector2.right, aimDirection) < 0 ? true : false;
-    }
+    
     private void OnCollisionEnter2D(Collision2D other)
     {
 
@@ -72,7 +64,15 @@ public class CollisionCheck : MonoBehaviour
     #endregion
 
     #region PublicMethods
+    public void SetSpriteColor(bool state)
+    {
+        spr.color = state ? ActiveColor : NotActiveColor;
 
+    }
+    public void FlipSprite(Vector2 aimDirection)
+    {
+        spr.flipX = Vector2.Dot(Vector2.right, aimDirection) < 0 ? true : false;
+    }
     #endregion
 
     #region PrivateMethods

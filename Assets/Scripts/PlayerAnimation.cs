@@ -5,9 +5,12 @@ public class PlayerAnimation : MonitoredBehaviour
 {
     #region Variables
     [SerializeField] public Animator animator;
+    [SerializeField] GameObject aimReticle;
+    [SerializeField] float reticlespeed;
     PlayerInput playerinput;
     CollisionCheck collisonCheck;
     Rigidbody2D rb;
+
     [Monitor]
     private Vector2 velocity => rb.velocity;
 
@@ -42,6 +45,11 @@ public class PlayerAnimation : MonitoredBehaviour
             animator.SetTrigger("ground");
 
         }
+
+        if(aimReticle.activeSelf)
+        {
+            transform.eulerAngles += new Vector3(0f, 0f, reticlespeed*Time.deltaTime);
+        }
     }
 
     private void CheckVelocity()
@@ -66,6 +74,11 @@ public class PlayerAnimation : MonitoredBehaviour
         animator.ResetTrigger("ground");
         animator.SetTrigger("aim");
 
+    }
+
+    public void SetAimReticle(bool state)
+    {
+        aimReticle.SetActive(state);
     }
     #endregion
 

@@ -11,6 +11,7 @@ public class PlayerInput : MonoBehaviour
     private Vector2 forcedir;
     [Header("DragandShoot")]
     [SerializeField] public float maxForce;
+    [SerializeField] public float poundForce = 10f;
     [SerializeField] int linepoints;
     [SerializeField] Transform aimer;
     [SerializeField] Transform dragger;
@@ -47,6 +48,12 @@ public class PlayerInput : MonoBehaviour
     {
         if (collisonCheck.readyToBounce)
             MouseInput();
+        if(playerState == PlayerState.FIRSTBOUNCE && Input.GetMouseButtonDown(1))
+        {
+            Debug.Log("pound pressed");
+            //rb.AddForce(Vector2.down * poundForce, ForceMode2D.Impulse);
+            rb.velocity = Vector2.down * poundForce;
+        }
     }
 
     private void MouseInput()
@@ -59,6 +66,7 @@ public class PlayerInput : MonoBehaviour
             playerState = PlayerState.AIMING;
 
             playerAnimation.SetAimTrigger();
+            playerAnimation.SetAimReticle(true);
             projection.lr.enabled = true;
             aimer.gameObject.SetActive(true);
             dragger.gameObject.SetActive(true);
@@ -86,6 +94,8 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             playerState = PlayerState.LAUNCHED;
+
+            playerAnimation.SetAimReticle(false);
             aimer.gameObject.SetActive(false);
             dragger.gameObject.SetActive(false);
             starterPos.gameObject.SetActive(false);
