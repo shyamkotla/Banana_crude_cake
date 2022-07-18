@@ -51,6 +51,7 @@ public class PlayerInput : MonoBehaviour
             MouseInput();
         if(playerState == PlayerState.FIRSTBOUNCE && Input.GetMouseButtonDown(1))
         {
+            collisonCheck.SetTrailColor(true);
             poundActive = true;
             //rb.AddForce(Vector2.down * poundForce, ForceMode2D.Impulse);
             rb.velocity = Vector2.down * poundForce;

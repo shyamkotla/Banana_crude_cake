@@ -7,12 +7,13 @@ public class CollisionCheck : MonoBehaviour
     PlayerInput playerInput;
     Rigidbody2D rb;
     [SerializeField] SpriteRenderer spriteRend;
-   // [SerializeField] TrailRenderer trailRend;
+    [SerializeField] TrailRenderer trailRend;
     [SerializeField] Color ActiveColor;
     [SerializeField] Color NotActiveColor;
     [SerializeField] Color poundTrailColor;
     public bool readyToBounce;
-    
+    Color tempgradient;
+    float tempwidth;
     #endregion
 
     #region UnityMethods
@@ -20,7 +21,8 @@ public class CollisionCheck : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         rb = rb = GetComponent<Rigidbody2D>();
-
+        tempgradient = trailRend.material.color;
+        tempwidth = trailRend.startWidth;
     }
 
     void Update()
@@ -28,6 +30,7 @@ public class CollisionCheck : MonoBehaviour
 
     }
 
+    
     
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -40,6 +43,7 @@ public class CollisionCheck : MonoBehaviour
         }
         else if (playerInput.playerState == PlayerInput.PlayerState.FIRSTBOUNCE && playerInput.poundActive)
         {
+            SetTrailColor(false);
             playerInput.playerState = PlayerInput.PlayerState.POUNDED;
             playerInput.poundActive = false;
         }
@@ -61,11 +65,16 @@ public class CollisionCheck : MonoBehaviour
 
 
     }
-   
+
 
     #endregion
 
     #region PublicMethods
+    public void SetTrailColor(bool state)
+    {
+        trailRend.material.color = state ? poundTrailColor : tempgradient;
+        trailRend.startWidth = state ? 1f : tempwidth;
+    }
     public void SetSpriteColor(bool state)
     {
         spriteRend.color = state ? ActiveColor : NotActiveColor;
