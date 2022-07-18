@@ -36,7 +36,7 @@ public class CollisionCheck : MonoBehaviour
         {
             dragAndShoot.playerState = PlayerInput.PlayerState.FIRSTBOUNCE;
         }
-        else if (dragAndShoot.playerState == PlayerInput.PlayerState.FIRSTBOUNCE)
+        else if (dragAndShoot.playerState == PlayerInput.PlayerState.FIRSTBOUNCE && other.collider.CompareTag("Platform"))
         {
             //reset velocity
             rb.velocity = Vector2.zero;
