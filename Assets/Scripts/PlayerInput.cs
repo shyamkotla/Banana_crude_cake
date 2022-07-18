@@ -21,13 +21,14 @@ public class PlayerInput : MonoBehaviour
     private Camera camRef;
     private CollisionCheck collisonCheck;
     private PlayerAnimation playerAnimation;
-    
+    public bool poundActive;
     public enum PlayerState
     {
         IDLE,
         AIMING,
         LAUNCHED,
         FIRSTBOUNCE,
+        POUNDED,
         SECONDBOUNCE
     }
     public PlayerState playerState;
@@ -50,7 +51,7 @@ public class PlayerInput : MonoBehaviour
             MouseInput();
         if(playerState == PlayerState.FIRSTBOUNCE && Input.GetMouseButtonDown(1))
         {
-            Debug.Log("pound pressed");
+            poundActive = true;
             //rb.AddForce(Vector2.down * poundForce, ForceMode2D.Impulse);
             rb.velocity = Vector2.down * poundForce;
         }

@@ -48,7 +48,7 @@ public class PlayerAnimation : MonitoredBehaviour
 
         if(aimReticle.activeSelf)
         {
-            transform.eulerAngles += new Vector3(0f, 0f, reticlespeed*Time.deltaTime);
+            aimReticle.transform.eulerAngles += new Vector3(0f, 0f, reticlespeed*Time.deltaTime);
         }
     }
 

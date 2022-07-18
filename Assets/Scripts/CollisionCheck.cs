@@ -4,11 +4,13 @@ using UnityEngine;
 public class CollisionCheck : MonoBehaviour
 {
     #region Variables
-    PlayerInput dragAndShoot;
+    PlayerInput playerInput;
     Rigidbody2D rb;
-    [SerializeField] SpriteRenderer spr;
+    [SerializeField] SpriteRenderer spriteRend;
+   // [SerializeField] TrailRenderer trailRend;
     [SerializeField] Color ActiveColor;
     [SerializeField] Color NotActiveColor;
+    [SerializeField] Color poundTrailColor;
     public bool readyToBounce;
     
     #endregion
@@ -16,7 +18,7 @@ public class CollisionCheck : MonoBehaviour
     #region UnityMethods
     void Start()
     {
-        dragAndShoot = GetComponent<PlayerInput>();
+        playerInput = GetComponent<PlayerInput>();
         rb = rb = GetComponent<Rigidbody2D>();
 
     }
@@ -32,11 +34,17 @@ public class CollisionCheck : MonoBehaviour
 
         readyToBounce = true;
         SetSpriteColor(true);
-        if (dragAndShoot.playerState == PlayerInput.PlayerState.LAUNCHED)
+        if (playerInput.playerState == PlayerInput.PlayerState.LAUNCHED)
         {
-            dragAndShoot.playerState = PlayerInput.PlayerState.FIRSTBOUNCE;
+            playerInput.playerState = PlayerInput.PlayerState.FIRSTBOUNCE;
         }
-        else if (dragAndShoot.playerState == PlayerInput.PlayerState.FIRSTBOUNCE && other.collider.CompareTag("Platform"))
+        else if (playerInput.playerState == PlayerInput.PlayerState.FIRSTBOUNCE && playerInput.poundActive)
+        {
+            playerInput.playerState = PlayerInput.PlayerState.POUNDED;
+            playerInput.poundActive = false;
+        }
+        else if ((playerInput.playerState == PlayerInput.PlayerState.FIRSTBOUNCE && other.collider.CompareTag("Platform")) 
+            || playerInput.playerState == PlayerInput.PlayerState.POUNDED)
         {
             //reset velocity
             rb.velocity = Vector2.zero;
@@ -46,33 +54,29 @@ public class CollisionCheck : MonoBehaviour
             transform.rotation = Quaternion.Euler(Vector3.zero);
 
             //change state
-            dragAndShoot.playerState = PlayerInput.PlayerState.SECONDBOUNCE;
+            playerInput.playerState = PlayerInput.PlayerState.SECONDBOUNCE;
 
         }
+       
 
 
     }
-    //private void OnCollisionStay2D(Collision2D collision)
-    //{
-    //    if (dragAndShoot.playerState == PlayerInput.PlayerState.SECONDBOUNCE)
-    //    {
-    //        rb.velocity = Vector2.zero;
-
-    //    }
-    //}
+   
 
     #endregion
 
     #region PublicMethods
     public void SetSpriteColor(bool state)
     {
-        spr.color = state ? ActiveColor : NotActiveColor;
+        spriteRend.color = state ? ActiveColor : NotActiveColor;
 
     }
     public void FlipSprite(Vector2 aimDirection)
     {
-        spr.flipX = Vector2.Dot(Vector2.right, aimDirection) < 0 ? true : false;
+        spriteRend.flipX = Vector2.Dot(Vector2.right, aimDirection) < 0 ? true : false;
     }
+
+
     #endregion
 
     #region PrivateMethods
