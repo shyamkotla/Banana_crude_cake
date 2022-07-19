@@ -16,7 +16,9 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] Transform aimer;
     [SerializeField] Transform dragger;
     [SerializeField] Transform starterPos;
-    [SerializeField] Projection projection;
+    [SerializeField] LineRenderer lr;
+    [SerializeField] Transform aimArrow;
+    
     private Rigidbody2D rb;
     private Camera camRef;
     private CollisionCheck collisonCheck;
@@ -32,7 +34,8 @@ public class PlayerInput : MonoBehaviour
         SECONDBOUNCE
     }
     public PlayerState playerState;
-    
+    [SerializeField] bool aimdebug;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,20 +45,22 @@ public class PlayerInput : MonoBehaviour
         playerAnimation = GetComponent<PlayerAnimation>();
         collisonCheck = GetComponent<CollisionCheck>();
         camRef = Camera.main;
+        lr.positionCount = 2;
     }
     
     // Update is called once per frame
     void Update()
     {
+
         if (collisonCheck.readyToBounce)
             MouseInput();
-        if(playerState == PlayerState.FIRSTBOUNCE && Input.GetMouseButtonDown(1))
+        if (playerState == PlayerState.FIRSTBOUNCE && Input.GetMouseButtonDown(1))
         {
             collisonCheck.SetTrailColor(true);
             poundActive = true;
-            //rb.AddForce(Vector2.down * poundForce, ForceMode2D.Impulse);
             rb.velocity = Vector2.down * poundForce;
         }
+
     }
 
     private void MouseInput()
@@ -69,40 +74,61 @@ public class PlayerInput : MonoBehaviour
 
             playerAnimation.SetAimTrigger();
             playerAnimation.SetAimReticle(true);
-            projection.lr.enabled = true;
-            aimer.gameObject.SetActive(true);
-            dragger.gameObject.SetActive(true);
-            starterPos.gameObject.SetActive(true);
+            aimArrow.gameObject.SetActive(true);
+            lr.enabled = true;
+            if(aimdebug)
+            {
+                aimer.gameObject.SetActive(true);
+                dragger.gameObject.SetActive(true);
+                starterPos.gameObject.SetActive(true);
+            }
 
             startPos = camRef.ScreenToWorldPoint(Input.mousePosition); // A vector
-            starterPos.position = startPos;
+            if(aimdebug)
+            {
+                starterPos.position = startPos;
+            }
         }
         if (Input.GetMouseButton(0))
         {
             dragPos = camRef.ScreenToWorldPoint(Input.mousePosition);
-            dragger.position = dragPos;
+            if(aimdebug)
+            {
+                dragger.position = dragPos;
+            }
             dir = dragPos - startPos;
 
             aimer.position = (Vector2)transform.position - dir;
 
             forcedir = aimer.position - transform.position;
             forcedir = new Vector2(Mathf.Clamp(forcedir.x, -maxForce, maxForce), Mathf.Clamp(forcedir.y, -maxForce, maxForce));
-
+            
             //flip sprite while aiming
             collisonCheck.FlipSprite(forcedir);
 
-            projection.SimulateTrajectory(transform.position, forcedir, maxForce);
+            AimArrow(aimer.position);
+
+
+            //lr.SetPosition(0, transform.position);
+            //lr.SetPosition(1, aimer.position);
+
         }
         if (Input.GetMouseButtonUp(0))
         {
             playerState = PlayerState.LAUNCHED;
 
             playerAnimation.SetAimReticle(false);
-            aimer.gameObject.SetActive(false);
-            dragger.gameObject.SetActive(false);
-            starterPos.gameObject.SetActive(false);
+            aimArrow.gameObject.SetActive(false);
 
-            projection.lr.enabled = false;
+            if (aimdebug)
+            {
+                aimer.gameObject.SetActive(false);
+                dragger.gameObject.SetActive(false);
+                starterPos.gameObject.SetActive(false);
+            }
+            
+
+            lr.enabled = false;
 
 
             dragPos = camRef.ScreenToWorldPoint(Input.mousePosition);
@@ -120,5 +146,12 @@ public class PlayerInput : MonoBehaviour
         }
     }
     
-    
+    void AimArrow(Vector3 target)
+    {
+        var direction = target - aimArrow.position;
+        direction.Normalize();
+        float rotation_z = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        aimArrow.rotation = Quaternion.Euler(0f, 0f, rotation_z);
+    }
+   
 }

@@ -21,6 +21,7 @@ public class CollisionCheck : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         rb = rb = GetComponent<Rigidbody2D>();
+        trailRend = GetComponent<TrailRenderer>();
         tempgradient = trailRend.material.color;
         tempwidth = trailRend.startWidth;
     }
