@@ -527,14 +527,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 829837141, guid: 07b321f4e922ad6479c8778ead099998, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1226079008, guid: 07b321f4e922ad6479c8778ead099998, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1449771113057561428, guid: 07b321f4e922ad6479c8778ead099998, type: 3}
       propertyPath: aimer
       value: 
@@ -544,25 +536,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1583908923}
     - target: {fileID: 1449771113057561428, guid: 07b321f4e922ad6479c8778ead099998, type: 3}
-      propertyPath: aimdebug
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1449771113057561428, guid: 07b321f4e922ad6479c8778ead099998, type: 3}
-      propertyPath: maxForce
-      value: 3.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1449771113057561428, guid: 07b321f4e922ad6479c8778ead099998, type: 3}
-      propertyPath: poundForce
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1449771113057561428, guid: 07b321f4e922ad6479c8778ead099998, type: 3}
       propertyPath: starterPos
       value: 
       objectReference: {fileID: 1403716317}
-    - target: {fileID: 1449771113057561432, guid: 07b321f4e922ad6479c8778ead099998, type: 3}
-      propertyPath: m_GravityScale
-      value: 1.8
-      objectReference: {fileID: 0}
     - target: {fileID: 3235274812978322461, guid: 07b321f4e922ad6479c8778ead099998, type: 3}
       propertyPath: m_RootOrder
       value: 5

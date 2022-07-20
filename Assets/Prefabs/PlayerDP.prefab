@@ -388,7 +388,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1226079009
 Transform:
   m_ObjectHideFlags: 0
@@ -492,7 +492,7 @@ Rigidbody2D:
   m_Mass: 100
   m_LinearDrag: 0.1
   m_AngularDrag: 1
-  m_GravityScale: 1.5
+  m_GravityScale: 1.8
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -526,8 +526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f54d3b012cf0d4cafec0419e27224e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxForce: 3.5
-  poundForce: 15
+  maxForce: 3.8
+  poundForce: 20
   linepoints: 10
   aimer: {fileID: 0}
   dragger: {fileID: 0}
@@ -535,8 +535,9 @@ MonoBehaviour:
   lr: {fileID: 1363370802}
   aimArrow: {fileID: 1226079009}
   poundActive: 0
+  optionMenuActive: 0
   playerState: 0
-  aimdebug: 0
+  aimdebug: 1
 --- !u!114 &4105205231145703363
 MonoBehaviour:
   m_ObjectHideFlags: 0
