@@ -24,6 +24,7 @@ public class PlayerInput : MonoBehaviour
     private CollisionCheck collisonCheck;
     private PlayerAnimation playerAnimation;
     public bool poundActive;
+    public bool optionMenuActive;
     public enum PlayerState
     {
         IDLE,
@@ -36,7 +37,7 @@ public class PlayerInput : MonoBehaviour
     public PlayerState playerState;
     [SerializeField] bool aimdebug;
 
-
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -47,19 +48,27 @@ public class PlayerInput : MonoBehaviour
         camRef = Camera.main;
         lr.positionCount = 2;
     }
-    
+
+    private void OnEnable()
+    {
+        OptionMenu.optionMenuOpened.AddListener(SetOptionActive);
+        OptionMenu.optionMenuClosed.AddListener(SetOptionInactive);
+    }
     // Update is called once per frame
     void Update()
     {
-
-        if (collisonCheck.readyToBounce)
-            MouseInput();
-        if (playerState == PlayerState.FIRSTBOUNCE && Input.GetMouseButtonDown(1))
+        if(!optionMenuActive)
         {
-            collisonCheck.SetTrailColor(true);
-            poundActive = true;
-            rb.velocity = Vector2.down * poundForce;
+            if (collisonCheck.readyToBounce)
+                MouseInput();
+            if (playerState == PlayerState.FIRSTBOUNCE && Input.GetMouseButtonDown(1))
+            {
+                collisonCheck.SetTrailColor(true);
+                poundActive = true;
+                rb.velocity = Vector2.down * poundForce;
+            }
         }
+        
 
     }
 
@@ -74,20 +83,18 @@ public class PlayerInput : MonoBehaviour
 
             playerAnimation.SetAimTrigger();
             playerAnimation.SetAimReticle(true);
-            aimArrow.gameObject.SetActive(true);
+            //aimArrow.gameObject.SetActive(true);
             lr.enabled = true;
             if(aimdebug)
             {
+                starterPos.position = startPos;
                 aimer.gameObject.SetActive(true);
                 dragger.gameObject.SetActive(true);
                 starterPos.gameObject.SetActive(true);
             }
 
             startPos = camRef.ScreenToWorldPoint(Input.mousePosition); // A vector
-            if(aimdebug)
-            {
-                starterPos.position = startPos;
-            }
+           
         }
         if (Input.GetMouseButton(0))
         {
@@ -106,11 +113,11 @@ public class PlayerInput : MonoBehaviour
             //flip sprite while aiming
             collisonCheck.FlipSprite(forcedir);
 
-            AimArrow(aimer.position);
+            //AimArrow(aimer.position);
 
 
-            //lr.SetPosition(0, transform.position);
-            //lr.SetPosition(1, aimer.position);
+            lr.SetPosition(0, transform.position);
+            lr.SetPosition(1, aimer.position);
 
         }
         if (Input.GetMouseButtonUp(0))
@@ -118,7 +125,7 @@ public class PlayerInput : MonoBehaviour
             playerState = PlayerState.LAUNCHED;
 
             playerAnimation.SetAimReticle(false);
-            aimArrow.gameObject.SetActive(false);
+            //aimArrow.gameObject.SetActive(false);
 
             if (aimdebug)
             {
@@ -153,5 +160,22 @@ public class PlayerInput : MonoBehaviour
         float rotation_z = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         aimArrow.rotation = Quaternion.Euler(0f, 0f, rotation_z);
     }
-   
+
+    void SetOptionActive()
+    {
+        StartCoroutine(delay(true));
+    }
+
+    void SetOptionInactive()
+    {
+        StartCoroutine(delay(false));
+    }
+
+    IEnumerator delay(bool state)
+    {
+        yield return new WaitForSeconds(0.5f);
+        optionMenuActive = state;
+    }
+    
+    
 }
