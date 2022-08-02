@@ -173,7 +173,7 @@ public class PlayerInput : MonoBehaviour
 
     IEnumerator delay(bool state)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
         optionMenuActive = state;
     }
     
