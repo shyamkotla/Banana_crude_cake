@@ -567,3 +567,60 @@ PrefabInstance:
       objectReference: {fileID: 788723387}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5257d7494ba6483459825f2381eb3c49, type: 3}
+--- !u!1001 &3913742837745886762
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 423287635485794024, guid: 719a0a0e1e841184493c4b30bb9fc816, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 423287635485794024, guid: 719a0a0e1e841184493c4b30bb9fc816, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 423287635485794024, guid: 719a0a0e1e841184493c4b30bb9fc816, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 423287635485794024, guid: 719a0a0e1e841184493c4b30bb9fc816, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 423287635485794024, guid: 719a0a0e1e841184493c4b30bb9fc816, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 423287635485794024, guid: 719a0a0e1e841184493c4b30bb9fc816, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 423287635485794024, guid: 719a0a0e1e841184493c4b30bb9fc816, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 423287635485794024, guid: 719a0a0e1e841184493c4b30bb9fc816, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 423287635485794024, guid: 719a0a0e1e841184493c4b30bb9fc816, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 423287635485794024, guid: 719a0a0e1e841184493c4b30bb9fc816, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 423287635485794024, guid: 719a0a0e1e841184493c4b30bb9fc816, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7757575115495713225, guid: 719a0a0e1e841184493c4b30bb9fc816, type: 3}
+      propertyPath: m_Name
+      value: Ghost camera effect
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 719a0a0e1e841184493c4b30bb9fc816, type: 3}

@@ -13,6 +13,7 @@ public class RespawnPlayer : MonoBehaviour
     [SerializeField] Transform playerDummy;
     [SerializeField] Transform flagPrefab;
     [SerializeField] Transform lastCheckPoint;
+    [SerializeField] GameObject ghostParticles;
     
     [SerializeField] float ghostCamLerpSpeed = 8f;
     [SerializeField] float lerpAmount = 1f;
@@ -38,6 +39,7 @@ public class RespawnPlayer : MonoBehaviour
     }
     void Start()
     {
+        ghostParticles.gameObject.SetActive(false);
         camFollow = Camera.main.GetComponent<CameraFollow>();
         orginalLerpSpeed = camFollow.camLerpSpeed;
 
@@ -69,6 +71,8 @@ public class RespawnPlayer : MonoBehaviour
                 // reset camera target to main player 
                 camFollow.target = playerRef;
                 camFollow.camLerpSpeed = orginalLerpSpeed;
+                ghostParticles.gameObject.SetActive(false);
+
                 reached = false;
                 respawning = false;
             }
@@ -99,6 +103,7 @@ public class RespawnPlayer : MonoBehaviour
         // set camera target to new visual
         camFollow.target = playerDummy;
         camFollow.camLerpSpeed = ghostCamLerpSpeed;
+        ghostParticles.gameObject.SetActive(true);
         // move player visual to lastcheckpoint via curves
         lerpAmount = 0.01f;
         respawning = true;
@@ -113,7 +118,7 @@ public class RespawnPlayer : MonoBehaviour
         float offset = 5f;
         B = Vec2RandomOffset(offset);
         C = Vec2RandomOffset(offset);
-        divisor = Random.Range(2F, 3f);
+        divisor = Random.Range(2.5f, 3f);
     }
 
     Vector2 Vec2RandomOffset(float off)
