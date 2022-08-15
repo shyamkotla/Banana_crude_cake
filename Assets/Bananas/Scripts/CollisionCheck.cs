@@ -11,6 +11,7 @@ public class CollisionCheck : MonoBehaviour
     [SerializeField] Color ActiveColor;
     [SerializeField] Color NotActiveColor;
     [SerializeField] Color poundTrailColor;
+    [SerializeField] GameObject notActiveIcon;
     public bool readyToBounce;
     Color tempgradient;
     float tempwidth;
@@ -84,7 +85,8 @@ public class CollisionCheck : MonoBehaviour
     }
     public void SetSpriteColor(bool state)
     {
-        spriteRend.color = state ? ActiveColor : NotActiveColor;
+        //spriteRend.color = state ? ActiveColor : NotActiveColor;
+        notActiveIcon.gameObject.SetActive(!state);
 
     }
     public void FlipSprite(Vector2 aimDirection)
