@@ -69,7 +69,6 @@ public class CollisionCheck : MonoBehaviour
             RespawnPlayer.instance.MoveToCheckpoint(transform.position);
             
         }
-       
 
 
     }
