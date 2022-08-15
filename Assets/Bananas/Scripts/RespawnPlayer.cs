@@ -69,8 +69,9 @@ public class RespawnPlayer : MonoBehaviour
                 playerRef.gameObject.SetActive(true);
                 playerRef.position = lastCheckPoint.position;
                 // reset camera target to main player 
-                camFollow.target = playerRef;
-                camFollow.camLerpSpeed = orginalLerpSpeed;
+                camFollow.SetTarget(playerRef, orginalLerpSpeed, false);
+                //camFollow.target = playerRef;
+                //camFollow.camLerpSpeed = orginalLerpSpeed;
                 ghostParticles.gameObject.SetActive(false);
 
                 reached = false;
@@ -101,8 +102,9 @@ public class RespawnPlayer : MonoBehaviour
         playerDummy.gameObject.SetActive(true);
         playerDummy.position = A;
         // set camera target to new visual
-        camFollow.target = playerDummy;
-        camFollow.camLerpSpeed = ghostCamLerpSpeed;
+        camFollow.SetTarget(playerDummy, ghostCamLerpSpeed, true);
+        //camFollow.target = playerDummy;
+        //camFollow.camLerpSpeed = ghostCamLerpSpeed;
         ghostParticles.gameObject.SetActive(true);
         // move player visual to lastcheckpoint via curves
         lerpAmount = 0.01f;
