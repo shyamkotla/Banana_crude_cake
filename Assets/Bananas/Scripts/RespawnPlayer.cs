@@ -11,7 +11,6 @@ public class RespawnPlayer : MonoBehaviour
     public static RespawnPlayer instance;
     [SerializeField] Transform playerRef;
     [SerializeField] Transform playerDummy;
-    [SerializeField] Transform flagPrefab;
     [SerializeField] Transform lastCheckPoint;
     [SerializeField] GameObject ghostParticles;
     
@@ -88,7 +87,7 @@ public class RespawnPlayer : MonoBehaviour
         if (lastCheckPoint != checkpoint)
         {
             lastCheckPoint = checkpoint;
-            flagPrefab.position = lastCheckPoint.position;
+            //flagPrefab.position = lastCheckPoint.position;
         }
     }
 
