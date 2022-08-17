@@ -20,6 +20,7 @@ public class PlayerInput : MonitoredBehaviour
     [SerializeField] public float maxForce;
     [SerializeField] public float poundForce = 10f;
     [SerializeField] int linepoints;
+    [SerializeField] float fallMultiplayer = 2.5f;
     [SerializeField] Transform aimer;
     [SerializeField] Transform dragger;
     [SerializeField] Transform starterPos;
@@ -79,7 +80,11 @@ public class PlayerInput : MonitoredBehaviour
                 rb.velocity = Vector2.down * poundForce;
             }
         }
-        
+
+        if (rb.velocity.y <= 0.1f && playerState == PlayerState.LAUNCHED)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplayer - 1) * Time.deltaTime;
+        }
 
     }
 
