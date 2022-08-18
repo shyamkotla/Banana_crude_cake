@@ -17,6 +17,7 @@ public class RespawnPlayer : MonoBehaviour
     [SerializeField] float ghostCamLerpSpeed = 8f;
     [SerializeField] float lerpAmount = 1f;
     [SerializeField] float divisor = 2f;
+    [SerializeField] private float ghostTravelSpeed;
     CameraFollow camFollow;
     bool respawning = false;
     bool reached = false;
@@ -51,7 +52,8 @@ public class RespawnPlayer : MonoBehaviour
         {
             if (lerpAmount < 1f)
             {
-                lerpAmount = lerpAmount + (float)((Time.deltaTime) / divisor);
+                //lerpAmount = lerpAmount + (float)((Time.deltaTime) / divisor);
+                lerpAmount += ghostTravelSpeed * Time.deltaTime;
                 //Debug.Log(lerpAmount);
                 BezierCurveLerping();
             }
@@ -69,8 +71,7 @@ public class RespawnPlayer : MonoBehaviour
                 playerRef.position = lastCheckPoint.position;
                 // reset camera target to main player 
                 camFollow.SetTarget(playerRef, orginalLerpSpeed, false);
-                //camFollow.target = playerRef;
-                //camFollow.camLerpSpeed = orginalLerpSpeed;
+                //disable particles
                 ghostParticles.gameObject.SetActive(false);
 
                 reached = false;
@@ -102,8 +103,7 @@ public class RespawnPlayer : MonoBehaviour
         playerDummy.position = A;
         // set camera target to new visual
         camFollow.SetTarget(playerDummy, ghostCamLerpSpeed, true);
-        //camFollow.target = playerDummy;
-        //camFollow.camLerpSpeed = ghostCamLerpSpeed;
+        //enable ghost particles
         ghostParticles.gameObject.SetActive(true);
         // move player visual to lastcheckpoint via curves
         lerpAmount = 0.01f;
