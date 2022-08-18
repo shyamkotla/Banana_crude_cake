@@ -9,29 +9,32 @@ public class CameraFollow : MonoBehaviour
     private void Start()
     {
         offset = target.position - transform.position;
-        //transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
     }
     private void FixedUpdate()
     {
+        // since main player is rb controlled ..
         if(!ghost)
         {
-            transform.position = new Vector3(target.position.x-offset.x, target.position.y-offset.y, this.transform.position.z);
+           LerpToTarget();
+
         }
         
     }
     private void LateUpdate()
     {
+        // player ghost updates
         if(ghost)
         {
-            var A = new Vector3(transform.position.x, transform.position.y, -10f);
-            var B = target.position - offset;
-            B.z = -10f;
-            transform.position = Vector3.Lerp(A, B, camLerpSpeed * Time.deltaTime);
+            LerpToTarget();
         }
-        //transform.position = Vector3.Lerp(transform.position, target.position - offset, camLerpSpeed * Time.deltaTime);
-        //transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
-       
+    }
 
+    private void LerpToTarget()
+    {
+        var A = new Vector3(transform.position.x, transform.position.y, -10f);
+        var B = target.position - offset;
+        B.z = -10f;
+        transform.position = Vector3.Lerp(A, B, camLerpSpeed * Time.deltaTime);
     }
     public void SetTarget(Transform target,float lerpspeed,bool state)
     {
