@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour,Idamagable
 {
-    public float health { get ; set ; }
+    [SerializeField] private float _health; 
+    public float health { 
+        get { return _health; }  
+        set { _health = value; } 
+    }
     public float deathDelay { get ; set ; }
 
     #region Variables

@@ -63,8 +63,12 @@ public class PlayerInput : MonitoredBehaviour
 
     private void OnEnable()
     {
-        OptionMenu.optionMenuOpened.AddListener(SetOptionActive);
-        OptionMenu.optionMenuClosed.AddListener(SetOptionInactive);
+        if(aimdebug)
+        {
+            OptionMenu.optionMenuOpened.AddListener(SetOptionActive);
+            OptionMenu.optionMenuClosed.AddListener(SetOptionInactive);
+        }
+        
     }
     // Update is called once per frame
     void Update()
@@ -90,17 +94,23 @@ public class PlayerInput : MonitoredBehaviour
 
     private void MouseInput()
     {
-        switch(optionDropdown.value)
+        VariableForceAiming(); 
+
+        if (aimdebug)
         {
-            case 0:
-                FixedForceAiming();
-                break;
-            case 1:
-                VariableForceAiming();
-                break;
-            default:
-                break;
+            switch (optionDropdown.value)
+            {
+                case 0:
+                    FixedForceAiming();
+                    break;
+                case 1:
+                    VariableForceAiming();
+                    break;
+                default:
+                    break;
+            }
         }
+        
         
     }
 

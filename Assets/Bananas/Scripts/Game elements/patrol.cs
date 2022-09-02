@@ -7,6 +7,7 @@ namespace Alpha
         [SerializeField] private float _PlatSpeed;
         [SerializeField] Transform ptA;
         [SerializeField] Transform ptB;
+        SpriteRenderer spr;
         Vector3 target;
         Vector3 direction;
         #region Variables
@@ -16,7 +17,7 @@ namespace Alpha
         #region UnityMethods
         void Start()
         {
-            
+            spr = GetComponent<SpriteRenderer>();   
             direction = Vector2.up;
             target = ptA.position;
         }
@@ -47,10 +48,14 @@ namespace Alpha
             var dis2 = Vector2.Distance(transform.position, ptB.position);
             if(dis1>1f)
             {
+                if(spr!=null)
+                    spr.flipX = false;
                 return ptA.position;
             }
             else if(dis2>1f)
             {
+                if (spr != null)
+                    spr.flipX = true;
                 return ptB.position;
             }
             return Vector3.zero ;
