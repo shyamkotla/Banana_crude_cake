@@ -6,7 +6,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-
+    
     [SerializeField] GameObject playerref;
      public static GameManager instance;
     

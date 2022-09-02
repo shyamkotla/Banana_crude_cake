@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour,Idamagable
 {
-    [SerializeField] private float _health; 
+    [SerializeField] private float _health;
+    
     public float health { 
         get { return _health; }  
         set { _health = value; } 
@@ -34,7 +35,7 @@ public class Enemy : MonoBehaviour,Idamagable
     {
         Destroy(gameObject,deathDelay);
     }
-
+    
     public void TakeDamage(float damage)
     {
         health -= damage;
