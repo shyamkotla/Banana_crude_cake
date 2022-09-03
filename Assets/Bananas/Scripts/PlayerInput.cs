@@ -94,24 +94,19 @@ public class PlayerInput : MonitoredBehaviour
 
     private void MouseInput()
     {
-        VariableForceAiming(); 
 
-        if (aimdebug)
+        switch (optionDropdown.value)
         {
-            switch (optionDropdown.value)
-            {
-                case 0:
-                    FixedForceAiming();
-                    break;
-                case 1:
-                    VariableForceAiming();
-                    break;
-                default:
-                    break;
-            }
+            case 0:
+                FixedForceAiming();
+                break;
+            case 1:
+                VariableForceAiming();
+                break;
+            default:
+                break;
         }
-        
-        
+
     }
 
     void VariableForceAiming()

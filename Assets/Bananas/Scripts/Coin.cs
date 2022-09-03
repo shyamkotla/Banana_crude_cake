@@ -22,7 +22,8 @@ namespace Alpha
         {
             if (other.GetComponent<CollisionCheck>())
             {
-                Destroy(this.gameObject,0.2f);
+                GameManager.instance.CoinCollected();
+                Destroy(this.gameObject);
             }
 
         }

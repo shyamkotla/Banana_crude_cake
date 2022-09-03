@@ -6,13 +6,17 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    
+    [SerializeField] TextMeshProUGUI timerTXT;
+    [SerializeField] TextMeshProUGUI collectiblesTXT;
     [SerializeField] GameObject playerref;
-     public static GameManager instance;
+    [SerializeField] GameObject gameOverCanvas;
+    [SerializeField] float levelTimer = 30f;
+    float timer = 0f;
+    string timeLeft = "Time Left : ";
+    public static GameManager instance;
+    bool fired = false;
+    int collectibles = 0;
     
-
-
-
     //[SerializeField] Transform maze_entrypoint;
     // Start is called before the first frame update
 
@@ -28,17 +32,30 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
     }
-   
+
     // on spike hit or fall through level
-    public void SpawnAtLastCheckPoint()
+    private void Update()
     {
-        
+        if(levelTimer > 0f)
+        {
+            levelTimer -= Time.deltaTime;
+            timerTXT.text = timeLeft + levelTimer.ToString(".0#");
+        }
+        else
+        {
+            if (!fired)
+            {
+                fired = true;
+                collectiblesTXT.text = "-"+collectibles.ToString();
+                gameOverCanvas.SetActive(true);
+            }
+        }
     }
 
-    void SpinPlayer()
+    public void  CoinCollected()
     {
-
+        collectibles++;
     }
 
-    
+
 }

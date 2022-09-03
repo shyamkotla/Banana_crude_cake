@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 669fc3cd2557a9649bee15869b4963e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathFX: {fileID: 4164762526465554687, guid: 38f51417047962642902e92d31a02e94, type: 3}
+  deathFX: {fileID: 2774505462523609097, guid: 35513e6e6086a6645bf4df9c5308cc96, type: 3}
 --- !u!1 &8928498286123092490
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public class DeathEffect : MonoBehaviour
         if (other.transform.GetComponent<CollisionCheck>())
         {
             Destroy(this.gameObject);
-            var temp = Instantiate(deathFX,this.transform.position,Quaternion.identity);
+            var temp = Instantiate(deathFX,this.transform.position+new Vector3(0f,0.5f,0f),Quaternion.identity);
             Destroy(temp, 0.5f);
         }
     }
