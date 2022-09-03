@@ -23,7 +23,7 @@ public class DeathEffect : MonoBehaviour
         {
             Destroy(this.gameObject);
             var temp = Instantiate(deathFX,this.transform.position+new Vector3(0f,0.5f,0f),Quaternion.identity);
-            Destroy(temp, 0.5f);
+            //Destroy(temp, 0.5f);
         }
     }
     #endregion

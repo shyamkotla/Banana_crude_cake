@@ -66,7 +66,7 @@ public class CollisionCheck : MonoBehaviour
         if(other.transform.CompareTag("Spike"))
         {
             rb.velocity = Vector2.zero;
-            RespawnPlayer.instance.MoveToCheckpoint(transform.position);
+            //RespawnPlayer.instance.MoveToCheckpoint(transform.position);
             
         }
 
