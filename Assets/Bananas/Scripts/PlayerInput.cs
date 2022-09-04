@@ -278,7 +278,7 @@ public class PlayerInput : MonitoredBehaviour
 
     void SetOptionInactive()
     {
-        StartCoroutine(delay(false,0.8f));
+        StartCoroutine(delay(false,1f));
     }
 
     IEnumerator delay(bool state,float time)

@@ -1,44 +1,41 @@
 using UnityEngine;
 
-namespace Alpha
+public class Coin : MonoBehaviour
 {
-    public class Coin : MonoBehaviour
-    { 
-        #region Variables
+    #region Variables
 
-        #endregion
+    #endregion
 
-        #region UnityMethods
-        void Start()
-        {
+    #region UnityMethods
+    void Start()
+    {
 
-        }
-
-        void Update()
-        {
-
-        }
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.GetComponent<CollisionCheck>())
-            {
-                GameManager.instance.CoinCollected();
-                Destroy(this.gameObject);
-            }
-
-        }
-        #endregion
-
-        #region PublicMethods
-
-        #endregion
-
-        #region PrivateMethods
-
-        #endregion
-
-        #region GameEventListeners
-
-        #endregion
     }
+
+    void Update()
+    {
+
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.GetComponent<CollisionCheck>())
+        {
+            GameManager.instance.CoinCollected();
+            Destroy(this.gameObject);
+        }
+
+    }
+    #endregion
+
+    #region PublicMethods
+
+    #endregion
+
+    #region PrivateMethods
+
+    #endregion
+
+    #region GameEventListeners
+
+    #endregion
 }

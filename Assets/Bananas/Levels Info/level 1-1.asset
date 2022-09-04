@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e978100fa0d2544a9520eb1f8e485d, type: 3}
+  m_Name: level 1-1
+  m_EditorClassIdentifier: 
+  level: 1
+  wave: 1
+  levelTileMap: {fileID: 0}
+  enemies:
+  - {x: 3.8, y: -5.635}
+  - {x: -8.617603, y: -0.5804572}
+  collectibles:
+  - {x: 12.581327, y: -5.0335045}
+  - {x: 10.671328, y: -5.1035047}
