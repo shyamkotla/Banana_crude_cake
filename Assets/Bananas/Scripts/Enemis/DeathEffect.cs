@@ -3,7 +3,8 @@ using UnityEngine;
 public class DeathEffect : MonoBehaviour
 {
     #region Variables
-    [SerializeField] GameObject deathFX;
+    
+   
     #endregion
 
     #region UnityMethods
@@ -17,19 +18,9 @@ public class DeathEffect : MonoBehaviour
     {
 
     }
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.transform.GetComponent<CollisionCheck>())
-        {
-            Destroy(this.gameObject);
-            var temp = Instantiate(deathFX,this.transform.position+new Vector3(0f,0.5f,0f),Quaternion.identity);
-            //Destroy(temp, 0.5f);
-        }
-    }
-    #endregion
+    
 
-    #region PublicMethods
-
+    
     #endregion
 
     #region PrivateMethods

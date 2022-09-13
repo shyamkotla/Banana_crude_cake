@@ -1,13 +1,11 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour,Idamagable
+public class Player : MonoBehaviour,Idamagable
 {
-    [Header("Enemy ")]
     [SerializeField] float health;
-    [SerializeField] float deathDelay = 0.3f;
-    [SerializeField] GameObject deathFX;
     [SerializeField] public float damage;
-
+    [SerializeField] float playerHitJump;
+    Rigidbody2D rb;
 
     #region Variables
 
@@ -16,7 +14,7 @@ public class Enemy : MonoBehaviour,Idamagable
     #region UnityMethods
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -28,15 +26,13 @@ public class Enemy : MonoBehaviour,Idamagable
     #region PublicMethods
     public void Die()
     {
-        Destroy(this.gameObject, deathDelay);
-        Instantiate(deathFX, this.transform.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
+        //respawn or scene reset
     }
-    #endregion
 
-    #region PublicMethods
     public void TakeDamage(float damage)
     {
         health -= damage;
+        rb.AddForce(Vector2.up*playerHitJump, ForceMode2D.Impulse);
         if (health <= 0f)
             Die();
     }

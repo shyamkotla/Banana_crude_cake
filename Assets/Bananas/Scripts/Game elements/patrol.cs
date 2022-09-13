@@ -49,13 +49,19 @@ namespace Alpha
             if(dis1>1f)
             {
                 if(spr!=null)
-                    spr.flipX = false;
+                {
+                    //spr.flipX = false;
+                    transform.localScale = new Vector3(1f, 1f, 1f);
+                }
                 return ptA.position;
             }
             else if(dis2>1f)
             {
                 if (spr != null)
-                    spr.flipX = true;
+                {
+                    //spr.flipX = true;
+                    transform.localScale = new Vector3(-1f, 1f, 1f);
+                }
                 return ptB.position;
             }
             return Vector3.zero ;
