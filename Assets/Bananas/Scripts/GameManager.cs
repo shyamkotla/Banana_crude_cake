@@ -36,25 +36,26 @@ public class GameManager : MonoBehaviour
     // on spike hit or fall through level
     private void Update()
     {
-        if(levelTimer > 0f)
-        {
-            levelTimer -= Time.deltaTime;
-            timerTXT.text = timeLeft + levelTimer.ToString(".0#");
-        }
-        else
-        {
-            if (!fired)
-            {
-                fired = true;
-                collectiblesTXT.text = "-"+collectibles.ToString();
-                gameOverCanvas.SetActive(true);
-            }
-        }
+        //if(levelTimer > 0f)
+        //{
+        //    levelTimer -= Time.deltaTime;
+        //    timerTXT.text = timeLeft + levelTimer.ToString(".0#");
+        //}
+        //else
+        //{
+        //    if (!fired)
+        //    {
+        //        fired = true;
+        //        collectiblesTXT.text = "-"+collectibles.ToString();
+        //        gameOverCanvas.SetActive(true);
+        //    }
+        //}
     }
 
     public void  CoinCollected()
     {
         collectibles++;
+        collectiblesTXT.text = collectibles.ToString();
     }
 
 
