@@ -1,11 +1,13 @@
 using UnityEngine;
-
+using DG.Tweening;
 
 public class CollisionCheck : MonoBehaviour
 {
     #region Variables
     PlayerInput playerInput;
     Rigidbody2D rb;
+    [SerializeField] float shakeStrength;
+    [SerializeField] float shakeDuration;
     [SerializeField] SpriteRenderer spriteRend;
     [SerializeField] TrailRenderer trailRend;
     [SerializeField] Color ActiveColor;
@@ -41,10 +43,16 @@ public class CollisionCheck : MonoBehaviour
         SetSpriteColor(true);
         if (playerInput.playerState == PlayerInput.PlayerState.LAUNCHED)
         {
+            SoundManager.instance.PlayFirstBounceSFx();
             playerInput.playerState = PlayerInput.PlayerState.FIRSTBOUNCE;
         }
         else if (playerInput.playerState == PlayerInput.PlayerState.FIRSTBOUNCE && playerInput.poundActive)
         {
+            //SFX
+            SoundManager.instance.PlayPoundSFx();
+            //cameraShake
+            
+            Camera.main.DOShakePosition(shakeDuration, shakeStrength,10,90, false);
             SetTrailColor(false);
             playerInput.playerState = PlayerInput.PlayerState.POUNDED;
             playerInput.poundActive = false;

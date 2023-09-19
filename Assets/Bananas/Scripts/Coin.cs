@@ -20,6 +20,7 @@ public class Coin : MonoBehaviour
     {
         if (other.GetComponent<CollisionCheck>())
         {
+            SoundManager.instance.PlayCollectibleSFx();
             GameManager.instance.CoinCollected();
             Destroy(this.gameObject);
         }

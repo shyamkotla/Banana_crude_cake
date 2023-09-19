@@ -76,6 +76,8 @@ public class RespawnPlayer : MonoBehaviour
 
                 reached = false;
                 respawning = false;
+                SoundManager.instance.PlayGhostRespawnSFx(false);
+
             }
         }
         
@@ -108,6 +110,8 @@ public class RespawnPlayer : MonoBehaviour
         // move player visual to lastcheckpoint via curves
         lerpAmount = 0.01f;
         respawning = true;
+        //start playing ghost audio
+        SoundManager.instance.PlayGhostRespawnSFx(true);
         SetRandomValues();
         
     }

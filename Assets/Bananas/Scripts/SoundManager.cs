@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private AudioClip launchSfx;
+    [SerializeField] private AudioClip[] launchSfx;
     [SerializeField] private AudioClip starCollectibleSfx;
     [SerializeField] private AudioClip gameMusic;
+    [SerializeField] private AudioClip poundSFx;
+    [SerializeField] private AudioClip ghostRespawnSFx;
+    [SerializeField] private AudioClip[] aimStretchSfx;
+    [SerializeField] private AudioClip[] firstBounceSfx;
     private AudioSource audioSource;
     public static SoundManager instance;
     private void Awake()
@@ -18,15 +22,42 @@ public class SoundManager : MonoBehaviour
     {
         audioSource= GetComponent<AudioSource>();
     }
-
+    public void PlayAimSFx()
+    {
+        audioSource.clip = aimStretchSfx[Random.Range(0, aimStretchSfx.Length)];
+        audioSource.Play();
+    }
     public void PlayLaunchSFx()
     {
-        audioSource.clip= launchSfx;
+        audioSource.clip= launchSfx[Random.Range(0,launchSfx.Length)];
         audioSource.Play();
     }
     public void PlayCollectibleSFx()
     {
         audioSource.clip= starCollectibleSfx;
         audioSource.Play();
+    }
+    public void PlayFirstBounceSFx()
+    {
+        audioSource.clip = firstBounceSfx[Random.Range(0,firstBounceSfx.Length)];
+        audioSource.Play();
+    }
+    public void PlayPoundSFx()
+    {
+        audioSource.clip = poundSFx;
+        audioSource.Play();
+    }
+    public void PlayGhostRespawnSFx(bool value)
+    {
+
+        if (value)
+        {
+            audioSource.clip = ghostRespawnSFx;
+            audioSource.Play();
+        }
+        else
+        {
+            audioSource.Stop();
+        }
     }
 }

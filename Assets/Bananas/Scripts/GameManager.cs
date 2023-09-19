@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject playerref;
     [SerializeField] GameObject gameOverCanvas;
     [SerializeField] float levelTimer = 30f;
-    float timer = 0f;
-    string timeLeft = "Time Left : ";
+    //float timer = 0f;
+    //string timeLeft = "Time Left : ";
     public static GameManager instance;
     bool fired = false;
     int collectibles = 0;

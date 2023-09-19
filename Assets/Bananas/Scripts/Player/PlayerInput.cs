@@ -26,6 +26,7 @@ public class PlayerInput : MonitoredBehaviour
     [SerializeField] Transform starterPos;
     [SerializeField] LineRenderer lr;
     [SerializeField] Transform aimArrow;
+    [SerializeField] Projection projectionCreator;
     [SerializeField] TMP_Dropdown optionDropdown;
     
     private Rigidbody2D rb;
@@ -85,13 +86,15 @@ public class PlayerInput : MonitoredBehaviour
             }
         }
 
+    }
+    private void FixedUpdate()
+    {
+        //faster falling
         if (rb.velocity.y <= 0.1f && playerState == PlayerState.LAUNCHED)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplayer - 1) * Time.deltaTime;
         }
-
     }
-
     private void MouseInput()
     {
 
@@ -119,7 +122,9 @@ public class PlayerInput : MonitoredBehaviour
 
             playerAnimation.SetAimTrigger();
             playerAnimation.SetAimReticle(true);
-            lr.enabled = true;
+
+            projectionCreator.ToggelLineRenderer(true);
+            //lr.enabled = true;
             if (aimdebug)
             {
                 starterPos.position = startPos;
@@ -143,18 +148,24 @@ public class PlayerInput : MonitoredBehaviour
             aimer.position = (Vector2)transform.position - dir;
 
             forcedir = aimer.position - transform.position;
-            forcedir = new Vector2(Mathf.Clamp(forcedir.x, -maxForce, maxForce), Mathf.Clamp(forcedir.y, -maxForce, maxForce));
+            //forcedir = forcedir.normalized;
+            //forcedir = new Vector2(Mathf.Clamp(forcedir.x, -maxForce, maxForce), Mathf.Clamp(forcedir.y, -maxForce, maxForce));
 
             //flip sprite while aiming
             collisonCheck.FlipSprite(forcedir);
 
-            lr.SetPosition(0, transform.position);
-            lr.SetPosition(1, aimer.position);
+            //draw trajectory via simulation
+            projectionCreator.SimulateTrajectory(transform.position, forcedir,rb.velocity, maxForce);
+
+            //lr.SetPosition(0, transform.position);
+            //lr.SetPosition(1, aimer.position);
 
         }
         if (Input.GetMouseButtonUp(0))
         {
             playerState = PlayerState.LAUNCHED;
+
+            SoundManager.instance.PlayLaunchSFx();
 
             playerAnimation.SetAimReticle(false);
 
@@ -165,8 +176,8 @@ public class PlayerInput : MonitoredBehaviour
                 starterPos.gameObject.SetActive(false);
             }
 
-
-            lr.enabled = false;
+             projectionCreator.ToggelLineRenderer(false);
+            //lr.enabled = false;
 
 
             dragPos = camRef.ScreenToWorldPoint(Input.mousePosition);
