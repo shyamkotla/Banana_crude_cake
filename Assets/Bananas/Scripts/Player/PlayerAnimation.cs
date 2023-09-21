@@ -11,8 +11,8 @@ public class PlayerAnimation : MonitoredBehaviour
     CollisionCheck collisonCheck;
     Rigidbody2D rb;
 
-    [Monitor]
-    private Vector2 velocity => rb.velocity;
+    //[Monitor]
+    //private Vector2 velocity => rb.velocity;
 
     #endregion
 

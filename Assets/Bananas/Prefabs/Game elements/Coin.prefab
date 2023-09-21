@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3924863411412394177}
   - component: {fileID: 3924863411412394179}
   - component: {fileID: 3924863411412394172}
+  - component: {fileID: -5218333287143863880}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3924863411412394176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 78, y: -7.9, z: 0}
-  m_LocalScale: {x: 0.5820093, y: 0.5820093, z: 0.5820093}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 295719cd7b39a6944bd8b53d5d4278bd, type: 3}
+  m_Sprite: {fileID: 173211594, guid: 03833d7cf7394de47ad4e93f13f15049, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,7 +104,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.6, y: 2.6}
+    oldSize: {x: 3.3333333, y: 3.6}
     newSize: {x: 2.6, y: 2.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -124,3 +125,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 504773d856aa5df46b9c358ed9fb7b30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &-5218333287143863880
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3924863411412394176}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c28718fd0e6783240afd0495221beb7a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

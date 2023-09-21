@@ -5,11 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
-
-    // Start is called before the first frame update
-    void Start()
+    public static LevelLoader instance;
+    private void Awake()
     {
-        
+        if (instance != this && instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -20,6 +27,17 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadSceneIndex(int n)
     {
+        //only to be use for game levels 1 to 6
         SceneManager.LoadScene(n);
+    }
+    public void LoadMaineMenu()
+    {
+        SceneManager.LoadScene("Main menu");
+
+    }
+    public void LoadLevelSelect()
+    {
+        SceneManager.LoadScene("LevelSelection");
+
     }
 }

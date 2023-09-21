@@ -13,10 +13,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] float levelTimer = 30f;
     //float timer = 0f;
     //string timeLeft = "Time Left : ";
+    public bool gamePaused = false;
     public static GameManager instance;
     bool fired = false;
     int collectibles = 0;
-    
     //[SerializeField] Transform maze_entrypoint;
     // Start is called before the first frame update
 
@@ -58,5 +58,16 @@ public class GameManager : MonoBehaviour
         collectiblesTXT.text = collectibles.ToString();
     }
 
-
+    public void PauseGame()
+    {
+        gamePaused = !gamePaused;
+        if(gamePaused)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
 }

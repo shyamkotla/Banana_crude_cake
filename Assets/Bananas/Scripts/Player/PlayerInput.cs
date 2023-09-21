@@ -13,8 +13,8 @@ public class PlayerInput : MonitoredBehaviour
     private Vector2 dir;
     private Vector2 forcedir;
 
-    [Monitor]
-    Vector2 forceDisplay => forcedir.normalized;
+    //[Monitor]
+    //Vector2 forceDisplay => forcedir.normalized;
 
     [Header("DragandShoot")]
     [SerializeField] public float maxForce;
@@ -74,7 +74,7 @@ public class PlayerInput : MonitoredBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!optionMenuActive)
+        if(!optionMenuActive && !GameManager.instance.gamePaused)
         {
             if (collisonCheck.readyToBounce)
                 MouseInput();
@@ -97,7 +97,7 @@ public class PlayerInput : MonitoredBehaviour
     }
     private void MouseInput()
     {
-
+        //FixedForceAiming();
         switch (optionDropdown.value)
         {
             case 0:

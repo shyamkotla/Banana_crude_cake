@@ -14,8 +14,8 @@ public class RespawnPlayer : MonoBehaviour
     [SerializeField] Transform lastCheckPoint;
     [SerializeField] GameObject ghostParticles;
     
+    float lerpAmount = 1f;
     [SerializeField] float ghostCamLerpSpeed = 8f;
-    [SerializeField] float lerpAmount = 1f;
     [SerializeField] float divisor = 2f;
     [SerializeField] private float ghostTravelSpeed;
     CameraFollow camFollow;

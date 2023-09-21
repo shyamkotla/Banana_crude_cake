@@ -14,6 +14,8 @@ public class CollisionCheck : MonoBehaviour
     [SerializeField] Color NotActiveColor;
     [SerializeField] Color poundTrailColor;
     [SerializeField] GameObject notActiveIcon;
+    public Sprite[] splashSprites;
+    [SerializeField] GameObject poundSplatterFxPrefab;
     public bool readyToBounce;
     Color tempgradient;
     float tempwidth;
@@ -51,8 +53,13 @@ public class CollisionCheck : MonoBehaviour
             //SFX
             SoundManager.instance.PlayPoundSFx();
             //cameraShake
-            
             Camera.main.DOShakePosition(shakeDuration, shakeStrength,10,90, false);
+            //splatter effect
+            var rotRange = Random.Range(165f, 185f);
+            var posRange = Random.Range(-0.5f, -1.5f);
+            var poundFx = Instantiate(poundSplatterFxPrefab, transform.position + new Vector3(0f,posRange,0f), Quaternion.Euler(0f,0f,rotRange));
+            poundFx.GetComponent<SpriteRenderer>().sprite = splashSprites[Random.Range(0,splashSprites.Length)];
+
             SetTrailColor(false);
             playerInput.playerState = PlayerInput.PlayerState.POUNDED;
             playerInput.poundActive = false;

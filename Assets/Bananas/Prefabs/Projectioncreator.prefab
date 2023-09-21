@@ -48,7 +48,7 @@ MonoBehaviour:
   obstaclesParent: {fileID: 0}
   playerPhyPrefab: {fileID: 3011191746822815524, guid: 51284a6b9cd2c2e4883ed46945741867, type: 3}
   lr: {fileID: 3594642562014803817}
-  maxFrameIterations: 50
+  maxFrameIterations: 30
 --- !u!120 &3594642562014803817
 LineRenderer:
   m_ObjectHideFlags: 0
