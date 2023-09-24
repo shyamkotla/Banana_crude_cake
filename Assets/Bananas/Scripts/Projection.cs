@@ -9,6 +9,7 @@ public class Projection : MonoBehaviour
     private PhysicsScene2D physicsScene;
     [SerializeField] Transform obstaclesParent;
     [SerializeField] Transform playerPhyPrefab;
+    [SerializeField] PlayerInput playerInput;
     public LineRenderer lr;
     [SerializeField] int maxFrameIterations = 100;
 
@@ -52,20 +53,27 @@ public class Projection : MonoBehaviour
         ghostPlayerRB.velocity = rbVelocity;
         ghostPlayerRB.AddForce(direction * force,ForceMode2D.Impulse);
 
-        if (ghostPlayerRB.velocity.y <= 0.1f )
-        {
-            ghostPlayerRB.velocity += Vector2.up * Physics2D.gravity.y * (2.5f - 1f) * Time.fixedDeltaTime;
-        }
+        //if (ghostPlayerRB.velocity.y <= 0.1f )
+        //{
+        //    ghostPlayerRB.velocity += Vector2.up * Physics2D.gravity.y * (2.5f - 1f) * Time.fixedDeltaTime;
+        //}
 
         //Physics2D.simulationMode = SimulationMode2D.Script;
         lr.positionCount = maxFrameIterations;
         for(int i=0;i<maxFrameIterations;i++)
         {
-            physicsScene.Simulate(Time.fixedDeltaTime);
+            physicsScene.Simulate(0.02f); //0.02f is the fixed Delta Time , which is affected during slomo effect , so hardcoded it 
             lr.SetPosition(i, ghostPlayer.transform.position);
         }
 
         ghostPlayer.gameObject.SetActive(false);
+    }
+    private void FixedUpdate()
+    {
+        //if (ghostPlayerRB.velocity.y <= 0.1f && playerInput.playerState == PlayerState.AIMING)
+        //{
+        //    ghostPlayerRB.velocity += Vector2.up * Physics2D.gravity.y * (2.5f - 1f) * Time.fixedDeltaTime;
+        //}
     }
     public void ToggelLineRenderer(bool value)
     {

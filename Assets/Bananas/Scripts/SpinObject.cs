@@ -4,6 +4,7 @@ public class SpinObject : MonoBehaviour
 {
     #region Variables
     [SerializeField] float speed;
+    [SerializeField] Vector3 spinAxis;
     const float multiplier = 100f;
     #endregion
 
@@ -15,7 +16,7 @@ public class SpinObject : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(Vector3.up, speed *multiplier* Time.deltaTime);
+        transform.Rotate(spinAxis, speed *multiplier* Time.deltaTime);
     }
     #endregion
 

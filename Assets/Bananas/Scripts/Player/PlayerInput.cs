@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Baracuda.Monitoring;
-
+using System.Threading;
 
 public class PlayerInput : MonitoredBehaviour
 {
@@ -21,6 +21,8 @@ public class PlayerInput : MonitoredBehaviour
     [SerializeField] public float poundForce = 10f;
     [SerializeField] int linepoints;
     [SerializeField] float fallMultiplayer = 2.5f;
+
+    [SerializeField] float sloMoTimeScale = 0.1f;
     [SerializeField] Transform aimer;
     [SerializeField] Transform dragger;
     [SerializeField] Transform starterPos;
@@ -28,21 +30,22 @@ public class PlayerInput : MonitoredBehaviour
     [SerializeField] Transform aimArrow;
     [SerializeField] Projection projectionCreator;
     [SerializeField] TMP_Dropdown optionDropdown;
+    [SerializeField] TimeManager timeManager;
     
+    public bool optionMenuActive;
     private Rigidbody2D rb;
     private Camera camRef;
     private CollisionCheck collisonCheck;
     private PlayerAnimation playerAnimation;
-    public bool poundActive;
-    public bool optionMenuActive;
+    private float sloMoTimer = 0f;
+
     public enum PlayerState
     {
         IDLE,
         AIMING,
         LAUNCHED,
-        FIRSTBOUNCE,
-        POUNDED,
-        SECONDBOUNCE
+        POUND,
+        FIRSTBOUNCE
     }
     public PlayerState playerState;
     [SerializeField] bool aimdebug;
@@ -74,54 +77,68 @@ public class PlayerInput : MonitoredBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!optionMenuActive && !GameManager.instance.gamePaused)
+        if(!GameManager.instance.gamePaused)
         {
-            if (collisonCheck.readyToBounce)
-                MouseInput();
-            if (playerState == PlayerState.FIRSTBOUNCE && Input.GetMouseButtonDown(1))
+            if(playerState == PlayerState.IDLE || playerState == PlayerState.AIMING)
             {
+                //Normal Aim 
+                VariableForceAiming(false);
+            }
+            else if (playerState == PlayerState.LAUNCHED && Input.GetMouseButtonDown(1))
+            {
+                playerState = PlayerState.POUND;
                 collisonCheck.SetTrailColor(true);
-                poundActive = true;
                 rb.velocity = Vector2.down * poundForce;
             }
+            else if (playerState == PlayerState.FIRSTBOUNCE || playerState == PlayerState.AIMING)
+            {
+                //SloMo Aim
+                VariableForceAiming(true);
+            }
         }
+
+        
 
     }
     private void FixedUpdate()
     {
         //faster falling
-        if (rb.velocity.y <= 0.1f && playerState == PlayerState.LAUNCHED)
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplayer - 1) * Time.deltaTime;
-        }
+        //if (rb.velocity.y <= 0.1f && playerState == PlayerState.LAUNCHED)
+        //{
+        //    rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplayer - 1) * Time.deltaTime;
+        //}
     }
-    private void MouseInput()
+    private void AimInput()
     {
-        //FixedForceAiming();
+        FixedForceAiming();
         switch (optionDropdown.value)
         {
             case 0:
                 FixedForceAiming();
                 break;
             case 1:
-                VariableForceAiming();
+                VariableForceAiming(false);
                 break;
             default:
                 break;
         }
-
     }
 
-    void VariableForceAiming()
+    void VariableForceAiming(bool sloMo)
     {
         if (Input.GetMouseButtonDown(0))
         {
-
-
             playerState = PlayerState.AIMING;
 
             playerAnimation.SetAimTrigger();
-            playerAnimation.SetAimReticle(true);
+            if(sloMo)
+            {
+                //enable Aim reticle with countDown
+                playerAnimation.SetAimReticle(true);
+                //slomo countdown - setting Time scale to 0.5f
+                Time.timeScale = timeManager.sloMoTimeScale;
+                timeManager.StartTimer();
+            }
 
             projectionCreator.ToggelLineRenderer(true);
             //lr.enabled = true;
@@ -167,7 +184,9 @@ public class PlayerInput : MonitoredBehaviour
 
             SoundManager.instance.PlayLaunchSFx();
 
+            //disable Aim reticle 
             playerAnimation.SetAimReticle(false);
+            timeManager.ResetScales();
 
             if (aimdebug)
             {
@@ -186,12 +205,12 @@ public class PlayerInput : MonitoredBehaviour
             aimer.position = (Vector2)transform.position - dir;
 
             forcedir = aimer.position - transform.position;
-            forcedir = new Vector2(Mathf.Clamp(forcedir.x, -maxForce, maxForce), Mathf.Clamp(forcedir.y, -maxForce, maxForce));
+            //forcedir = new Vector2(Mathf.Clamp(forcedir.x, -maxForce, maxForce), Mathf.Clamp(forcedir.y, -maxForce, maxForce));
 
-            rb.velocity = forcedir * maxForce;
+            rb.AddForce(forcedir * maxForce, ForceMode2D.Impulse);
 
-            collisonCheck.readyToBounce = false;
-            collisonCheck.SetSpriteColor(false);
+
+            //collisonCheck.SetSpriteColor(false);
         }
     }
     void FixedForceAiming()
@@ -267,8 +286,7 @@ public class PlayerInput : MonitoredBehaviour
 
             rb.velocity = (forcedir.normalized) * maxForce;
 
-            collisonCheck.readyToBounce = false;
-            collisonCheck.SetSpriteColor(false);
+            //collisonCheck.SetSpriteColor(false);
         }
     }
 

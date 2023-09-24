@@ -9,6 +9,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip gameMusic;
     [SerializeField] private AudioClip poundSFx;
     [SerializeField] private AudioClip ghostRespawnSFx;
+    [SerializeField] private AudioClip sloMoTimerSFx;
     [SerializeField] private AudioClip[] aimStretchSfx;
     [SerializeField] private AudioClip[] firstBounceSfx;
     private AudioSource audioSource;
@@ -37,7 +38,13 @@ public class SoundManager : MonoBehaviour
         audioSource.clip= starCollectibleSfx;
         audioSource.Play();
     }
-    public void PlayFirstBounceSFx()
+
+    public void PlaySloMoTimer()
+    {
+        audioSource.clip = sloMoTimerSFx;
+        audioSource.Play();
+    }
+    public void PlayBounceSFx()
     {
         audioSource.clip = firstBounceSfx[Random.Range(0,firstBounceSfx.Length)];
         audioSource.Play();

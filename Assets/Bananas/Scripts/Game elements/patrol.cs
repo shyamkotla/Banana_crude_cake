@@ -5,6 +5,8 @@ namespace Alpha
     public class patrol : MonoBehaviour
     {
         [SerializeField] private float _PlatSpeed;
+        [SerializeField] private bool flip;
+        
         [SerializeField] Transform ptA;
         [SerializeField] Transform ptB;
         SpriteRenderer spr;
@@ -32,6 +34,7 @@ namespace Alpha
             else
             {
                 target = GetTarget();
+                
             }
            
         }
@@ -48,7 +51,7 @@ namespace Alpha
             var dis2 = Vector2.Distance(transform.position, ptB.position);
             if(dis1>1f)
             {
-                if(spr!=null)
+                if(spr!=null && flip)
                 {
                     //spr.flipX = false;
                     transform.localScale = new Vector3(1f, 1f, 1f);
@@ -57,7 +60,7 @@ namespace Alpha
             }
             else if(dis2>1f)
             {
-                if (spr != null)
+                if (spr != null && flip)
                 {
                     //spr.flipX = true;
                     transform.localScale = new Vector3(-1f, 1f, 1f);
