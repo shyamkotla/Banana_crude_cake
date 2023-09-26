@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] launchSfx;
     [SerializeField] private AudioClip starCollectibleSfx;
     [SerializeField] private AudioClip gameMusic;
     [SerializeField] private AudioClip poundSFx;
     [SerializeField] private AudioClip ghostRespawnSFx;
     [SerializeField] private AudioClip sloMoTimerSFx;
+    [SerializeField] private AudioClip flagCheckPointSFx;
+    [SerializeField] private AudioClip acidSplashSFx;
+    [SerializeField] private AudioClip levelCompleteSFx;
+    [SerializeField] private AudioClip[] launchSfx;
     [SerializeField] private AudioClip[] aimStretchSfx;
     [SerializeField] private AudioClip[] firstBounceSfx;
     private AudioSource audioSource;
@@ -54,6 +57,21 @@ public class SoundManager : MonoBehaviour
         audioSource.clip = poundSFx;
         audioSource.Play();
     }
+    public void PlayFlagCheckPointSFx()
+    {
+        audioSource.clip = flagCheckPointSFx;
+        audioSource.Play();
+    }
+    public void PlayLevelCompleteSFx()
+    {
+        audioSource.clip = levelCompleteSFx;
+        audioSource.Play();
+    }
+    public void PlayAcidSplashSFx()
+    {
+        audioSource.clip = acidSplashSFx;
+        audioSource.Play();
+    }
     public void PlayGhostRespawnSFx(bool value)
     {
 
@@ -67,4 +85,13 @@ public class SoundManager : MonoBehaviour
             audioSource.Stop();
         }
     }
+    public bool IsPlaying()
+    {
+        return audioSource.isPlaying;
+    }
+    public void StopAudioSource()
+    {
+        audioSource.Stop();
+    }
+
 }

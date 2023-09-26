@@ -13,10 +13,16 @@ public class AreaSound : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        audioSource.Play();
+        if(collision.GetComponent<PlayerAnimation>())
+        {
+            audioSource.Play();
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        audioSource.Stop();
+        if (collision.GetComponent<PlayerAnimation>())
+        {
+            audioSource.Stop();
+        }
     }
 }

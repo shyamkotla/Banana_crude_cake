@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class LevelEnd : MonoBehaviour
 {
+    [SerializeField] GameObject acidSplashVFx;
     [SerializeField] GameObject levelEndPanel;
     [SerializeField] GameObject levelEndWindow;
     [SerializeField] float triggerDelay;
@@ -24,17 +25,23 @@ public class LevelEnd : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        var splashpos = collision.GetComponent<Transform>().position;
+        SpawnSplashEffect(splashpos);
         //enable level end panel
         levelEndPanel.SetActive(true);
         levelEndWindow.transform.localScale = Vector2.zero;
         levelEndWindow.transform.DOScale(1f, 1f).SetEase(easeStyle).OnComplete(() =>
         {
+            //play level complete audio
+            SoundManager.instance.PlayLevelCompleteSFx();
             //pause game to disable other inputs
             Debug.Log("gamestopped");
             GameManager.instance.PauseGame();
-            
         });
-
-
+    }
+    private void SpawnSplashEffect(Vector2 splashPos)
+    {
+        Instantiate(acidSplashVFx, splashPos+new Vector2(0f,-1f), Quaternion.Euler(90f,0f,0f));
+        SoundManager.instance.PlayAcidSplashSFx();
     }
 }

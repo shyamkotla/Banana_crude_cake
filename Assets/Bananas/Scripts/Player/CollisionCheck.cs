@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class CollisionCheck : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class CollisionCheck : MonoBehaviour
     //[SerializeField] GameObject notActiveIcon;
     public Sprite[] splashSprites;
     [SerializeField] GameObject poundSplatterFxPrefab;
+    public static UnityEvent CollisionCheckPounded =  new UnityEvent();
     //public bool readyToSloMoAim;
     Color tempgradient;
     float tempwidth;
@@ -35,7 +37,13 @@ public class CollisionCheck : MonoBehaviour
     {
         if (playerInput.playerState == PlayerInput.PlayerState.POUND)
         {
-            //Pounded after first bounce
+            //check if other body is breakable
+            if(other.collider.GetComponent<BreakablePT>())
+            {
+                CollisionCheckPounded.Invoke();
+            }
+
+            //Pounded after launch
             PoundEffects();
             SetToIdle();
         }

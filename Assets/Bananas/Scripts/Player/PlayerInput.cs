@@ -33,6 +33,7 @@ public class PlayerInput : MonitoredBehaviour
     [SerializeField] TimeManager timeManager;
     
     public bool optionMenuActive;
+    public bool isAiming;
     private Rigidbody2D rb;
     private Camera camRef;
     private CollisionCheck collisonCheck;
@@ -174,6 +175,18 @@ public class PlayerInput : MonitoredBehaviour
             //draw trajectory via simulation
             projectionCreator.SimulateTrajectory(transform.position, forcedir,rb.velocity, maxForce);
 
+            if (Input.GetAxis("Mouse X") != 0)
+            {
+                // Mouse is being moved while aiming; play the audio
+                if (!SoundManager.instance.IsPlaying())
+                {
+                    SoundManager.instance.PlayAimSFx();
+                }
+            }
+            else
+            {
+                SoundManager.instance.StopAudioSource();
+            }
             //lr.SetPosition(0, transform.position);
             //lr.SetPosition(1, aimer.position);
 
