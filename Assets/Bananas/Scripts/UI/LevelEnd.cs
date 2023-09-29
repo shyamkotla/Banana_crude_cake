@@ -10,6 +10,7 @@ public class LevelEnd : MonoBehaviour
     [SerializeField] GameObject acidSplashVFx;
     [SerializeField] GameObject levelEndPanel;
     [SerializeField] GameObject levelEndWindow;
+    [SerializeField] AudioSource levelmusicTrack;
     [SerializeField] float triggerDelay;
     [SerializeField] Ease easeStyle;
     // Start is called before the first frame update
@@ -27,6 +28,7 @@ public class LevelEnd : MonoBehaviour
     {
         var splashpos = collision.GetComponent<Transform>().position;
         SpawnSplashEffect(splashpos);
+        levelmusicTrack.Stop();
         //enable level end panel
         levelEndPanel.SetActive(true);
         levelEndWindow.transform.localScale = Vector2.zero;

@@ -27,7 +27,6 @@ public class DropPT : MonoBehaviour
         transform.parent = null;
         Destroy(parent.gameObject, deathtime);
         Destroy(this.gameObject, deathtime);
-        Debug.Log("hit ");
     }
     #endregion
 

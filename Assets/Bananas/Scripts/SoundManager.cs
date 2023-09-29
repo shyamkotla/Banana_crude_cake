@@ -11,6 +11,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip sloMoTimerSFx;
     [SerializeField] private AudioClip flagCheckPointSFx;
     [SerializeField] private AudioClip acidSplashSFx;
+    [SerializeField] private AudioClip brickBreakSFx;
+    [SerializeField] private AudioClip playerOnHitSFx;
     [SerializeField] private AudioClip levelCompleteSFx;
     [SerializeField] private AudioClip[] launchSfx;
     [SerializeField] private AudioClip[] aimStretchSfx;
@@ -60,6 +62,16 @@ public class SoundManager : MonoBehaviour
     public void PlayFlagCheckPointSFx()
     {
         audioSource.clip = flagCheckPointSFx;
+        audioSource.Play();
+    }
+    public void PlayBrickBreakSFx()
+    {
+        audioSource.clip = brickBreakSFx;
+        audioSource.Play();
+    }
+    public void PlayOnHitSFx()
+    {
+        audioSource.clip = playerOnHitSFx;
         audioSource.Play();
     }
     public void PlayLevelCompleteSFx()

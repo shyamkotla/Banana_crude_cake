@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class RespawnPlayer : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class RespawnPlayer : MonoBehaviour
     private Vector2 ABC,BCD;
     private Vector2 ABCD;
     //private bool respawning;
+    //[SerializeField] Transform offsetB;
+    //[SerializeField] Transform offsetC;
     public static RespawnPlayer instance;
     [SerializeField] Transform playerRef;
     [SerializeField] Transform playerDummy;
@@ -27,15 +30,16 @@ public class RespawnPlayer : MonoBehaviour
     #region UnityMethods
     private void Awake()
     {
-        if (instance != this && instance != null)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
+        instance = this;
+        //if (instance != this && instance != null)
+        //{
+        //    Destroy(this.gameObject);
+        //}
+        //else
+        //{
+        //    instance = this;
+        //    DontDestroyOnLoad(this.gameObject);
+        //}
     }
     void Start()
     {
@@ -69,6 +73,7 @@ public class RespawnPlayer : MonoBehaviour
                 // spawn player at last checkpoint
                 playerRef.gameObject.SetActive(true);
                 playerRef.position = lastCheckPoint.position;
+                playerRef.transform.rotation = Quaternion.Euler(Vector3.zero);
                 // reset camera target to main player 
                 camFollow.SetTarget(playerRef, orginalLerpSpeed, false);
                 //disable particles
@@ -76,9 +81,13 @@ public class RespawnPlayer : MonoBehaviour
 
                 reached = false;
                 respawning = false;
+
+                playerRef.GetComponent<PlayerInput>().playerState = PlayerInput.PlayerState.IDLE;
                 SoundManager.instance.PlayGhostRespawnSFx(false);
 
             }
+            //offsetB.position = B;
+            //offsetC.position = C;
         }
         
     }
@@ -118,22 +127,26 @@ public class RespawnPlayer : MonoBehaviour
     #endregion
 
     #region PrivateMethods
+   
     void SetRandomValues()
     {
         float offset = 5f;
-        B = Vec2RandomOffset(offset);
-        C = Vec2RandomOffset(offset);
-        divisor = Random.Range(2.5f, 3f);
-    }
+        Vector2 mid = (A + D) / 2;
+        Vector2 Amid = (A + mid) / 2;
+        Vector2 Dmid = (D + mid) / 2;
+        
+        //Vector2 direction = D - A;
+        var dir1 = D - Amid;
+        var dir2 = D - Dmid;
 
-    Vector2 Vec2RandomOffset(float off)
-    {
-        return new Vector2(Random.Range(A.x - off, D.x + off),
-                            Random.Range(A.y - off, D.y + off));
+        B = Amid+ Vector2.Perpendicular(dir1.normalized)*offset;
+        C = Dmid+ (Vector2.Perpendicular(dir2.normalized) *-1f * offset);
+        
     }
+    
     void BezierCurveLerping()
     {
-
+        //quadratic bezier curve b, c as control points
 
         AB = Vector2.Lerp(A, B, lerpAmount);
         BC = Vector2.Lerp(B, C, lerpAmount);
@@ -144,12 +157,7 @@ public class RespawnPlayer : MonoBehaviour
         ABCD = Vector2.Lerp(ABC, BCD, lerpAmount);
 
         playerDummy.transform.position = ABCD;
-
-
     }
     #endregion
-
-    #region GameEventListeners
-
-    #endregion
+    
 }

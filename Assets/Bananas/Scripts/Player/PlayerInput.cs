@@ -46,7 +46,9 @@ public class PlayerInput : MonitoredBehaviour
         AIMING,
         LAUNCHED,
         POUND,
-        FIRSTBOUNCE
+        FIRSTBOUNCE,
+        SLOMOAIM,
+        HIT
     }
     public PlayerState playerState;
     [SerializeField] bool aimdebug;
@@ -80,18 +82,19 @@ public class PlayerInput : MonitoredBehaviour
     {
         if(!GameManager.instance.gamePaused)
         {
-            if(playerState == PlayerState.IDLE || playerState == PlayerState.AIMING)
-            {
-                //Normal Aim 
-                VariableForceAiming(false);
-            }
-            else if (playerState == PlayerState.LAUNCHED && Input.GetMouseButtonDown(1))
+            if (playerState == PlayerState.LAUNCHED && Input.GetMouseButtonDown(1))
             {
                 playerState = PlayerState.POUND;
                 collisonCheck.SetTrailColor(true);
                 rb.velocity = Vector2.down * poundForce;
             }
-            else if (playerState == PlayerState.FIRSTBOUNCE || playerState == PlayerState.AIMING)
+
+            if (playerState == PlayerState.IDLE || playerState == PlayerState.AIMING)
+            {
+                //Normal Aim 
+                VariableForceAiming(false);
+            }
+            else if (playerState == PlayerState.FIRSTBOUNCE || playerState == PlayerState.SLOMOAIM)
             {
                 //SloMo Aim
                 VariableForceAiming(true);
@@ -129,16 +132,21 @@ public class PlayerInput : MonitoredBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            playerState = PlayerState.AIMING;
+            
 
             playerAnimation.SetAimTrigger();
             if(sloMo)
             {
+                playerState = PlayerState.SLOMOAIM;
                 //enable Aim reticle with countDown
                 playerAnimation.SetAimReticle(true);
                 //slomo countdown - setting Time scale to 0.5f
                 Time.timeScale = timeManager.sloMoTimeScale;
                 timeManager.StartTimer();
+            }
+            else
+            {
+                playerState = PlayerState.AIMING;
             }
 
             projectionCreator.ToggelLineRenderer(true);
@@ -175,17 +183,20 @@ public class PlayerInput : MonitoredBehaviour
             //draw trajectory via simulation
             projectionCreator.SimulateTrajectory(transform.position, forcedir,rb.velocity, maxForce);
 
-            if (Input.GetAxis("Mouse X") != 0)
+            if(!sloMo)
             {
-                // Mouse is being moved while aiming; play the audio
-                if (!SoundManager.instance.IsPlaying())
+                if (Input.GetAxis("Mouse X") != 0)
                 {
-                    SoundManager.instance.PlayAimSFx();
+                    // Mouse is being moved while aiming; play the audio
+                    if (!SoundManager.instance.IsPlaying())
+                    {
+                        SoundManager.instance.PlayAimSFx();
+                    }
                 }
-            }
-            else
-            {
-                SoundManager.instance.StopAudioSource();
+                else
+                {
+                    SoundManager.instance.StopAudioSource();
+                }
             }
             //lr.SetPosition(0, transform.position);
             //lr.SetPosition(1, aimer.position);

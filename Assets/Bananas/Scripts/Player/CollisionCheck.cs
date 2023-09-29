@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
+using UnityEditor.UIElements;
 
 public class CollisionCheck : MonoBehaviour
 {
@@ -11,16 +12,17 @@ public class CollisionCheck : MonoBehaviour
     [SerializeField] float shakeDuration;
     [SerializeField] SpriteRenderer spriteRend;
     [SerializeField] TrailRenderer trailRend;
-    [SerializeField] Color ActiveColor;
-    [SerializeField] Color NotActiveColor;
-    [SerializeField] Color poundTrailColor;
+    [SerializeField] FlashPlayer flashPlayer;
+    [SerializeField] AnimationCurve poundTrailWidthCurve;
     //[SerializeField] GameObject notActiveIcon;
     public Sprite[] splashSprites;
     [SerializeField] GameObject poundSplatterFxPrefab;
-    public static UnityEvent CollisionCheckPounded =  new UnityEvent();
+    Gradient normalGrad;
+    [SerializeField] Gradient poundGrad;
     //public bool readyToSloMoAim;
     Color tempgradient;
     float tempwidth;
+    AnimationCurve defCurve;
     #endregion
 
     #region UnityMethods
@@ -29,8 +31,9 @@ public class CollisionCheck : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         rb = rb = GetComponent<Rigidbody2D>();
         trailRend = GetComponent<TrailRenderer>();
-        tempgradient = trailRend.material.color;
+        normalGrad = trailRend.colorGradient;
         tempwidth = trailRend.startWidth;
+        defCurve = trailRend.widthCurve;
     }
     
     private void OnCollisionEnter2D(Collision2D other)
@@ -38,11 +41,15 @@ public class CollisionCheck : MonoBehaviour
         if (playerInput.playerState == PlayerInput.PlayerState.POUND)
         {
             //check if other body is breakable
-            if(other.collider.GetComponent<BreakablePT>())
+            if(other.collider.TryGetComponent<BreakablePT>(out BreakablePT breakable))
             {
-                CollisionCheckPounded.Invoke();
+                breakable.OnCollisionCheckPounded();
             }
-
+            else
+            {
+                //SFX
+                SoundManager.instance.PlayPoundSFx();
+            }
             //Pounded after launch
             PoundEffects();
             SetToIdle();
@@ -60,8 +67,13 @@ public class CollisionCheck : MonoBehaviour
 
         if(other.transform.CompareTag("Spike"))
         {
-            rb.velocity = Vector2.zero;
-            RespawnPlayer.instance.MoveToCheckpoint(transform.position);
+            // play hit audio
+            SoundManager.instance.PlayOnHitSFx();
+
+            playerInput.playerState = PlayerInput.PlayerState.HIT;
+            //Debug.Log("flash hit "+other.gameObject.name);
+            flashPlayer.FlashOnHit(this.transform.position);
+            //rb.velocity = Vector2.zero;
         }
     }
     #endregion
@@ -69,15 +81,11 @@ public class CollisionCheck : MonoBehaviour
     #region PublicMethods
     public void SetTrailColor(bool state)
     {
-        trailRend.material.color = state ? poundTrailColor : tempgradient;
-        trailRend.startWidth = state ? 1f : tempwidth;
+        trailRend.colorGradient = state ? poundGrad : normalGrad;
+        trailRend.startWidth = state ? 2f : tempwidth;
+        trailRend.widthCurve = state ? poundTrailWidthCurve : defCurve;
     }
-    //public void SetSpriteColor(bool state)
-    //{
-    //    //spriteRend.color = state ? ActiveColor : NotActiveColor;
-    //    notActiveIcon.gameObject.SetActive(!state);
-
-    //}
+    
     public void FlipSprite(Vector2 aimDirection)
     {
         spriteRend.flipX = Vector2.Dot(Vector2.right, aimDirection) < 0 ? true : false;
@@ -89,8 +97,6 @@ public class CollisionCheck : MonoBehaviour
     #region PrivateMethods
     private void PoundEffects()
     {
-        //SFX
-        SoundManager.instance.PlayPoundSFx();
         //cameraShake
         Camera.main.DOShakePosition(shakeDuration, shakeStrength, 10, 90, false);
         //splatter effect
@@ -98,7 +104,11 @@ public class CollisionCheck : MonoBehaviour
         var posRange = Random.Range(-0.5f, -1.5f);
         var poundFx = Instantiate(poundSplatterFxPrefab, transform.position + new Vector3(0f, posRange, 0f), Quaternion.Euler(0f, 0f, rotRange));
         poundFx.GetComponent<SpriteRenderer>().sprite = splashSprites[Random.Range(0, splashSprites.Length)];
-        SetTrailColor(false);
+
+        UnityTimer.Timer.Register(0.5f, () =>
+        {
+            SetTrailColor(false);
+        });
     }
 
     private void SetToIdle()

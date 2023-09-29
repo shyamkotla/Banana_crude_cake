@@ -12,7 +12,6 @@ public class BreakablePT : MonoBehaviour
     [SerializeField] float power = 10.0F;
     private void Start()
     {
-        CollisionCheck.CollisionCheckPounded.AddListener(OnCollisionCheckPounded);
     }
     //private void OnCollisionEnter2D(Collision2D other)
     //{
@@ -33,18 +32,15 @@ public class BreakablePT : MonoBehaviour
     //        Debug.Log("no playerInput component");
     //    }
     //}
-    private void OnCollisionCheckPounded()
+    public void OnCollisionCheckPounded()
     {
-        //var effect = Instantiate(breakablePTVFX, transform.position, Quaternion.identity);
-        breakablePTVFX.SetActive(true);
+        SoundManager.instance.PlayBrickBreakSFx();
+        var effect = Instantiate(breakablePTVFX, transform.position, Quaternion.identity);
+        rigidbodies = effect.GetComponentsInChildren<Rigidbody2D>();
+        //breakablePTVFX.SetActive(true);
         ExplodePlatform();
         Destroy(this.gameObject);
     }
-    private void OnDestroy()
-    {
-        CollisionCheck.CollisionCheckPounded.RemoveListener(OnCollisionCheckPounded);
-    }
-   
 
     void ExplodePlatform()
     {

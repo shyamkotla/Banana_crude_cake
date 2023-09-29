@@ -35,11 +35,14 @@ public class PlayerAnimation : MonitoredBehaviour
         {
             CheckVelocity();
         }
+        else if(playerinput.playerState == PlayerInput.PlayerState.HIT)
+        {
+            animator.SetTrigger("hit");
+        }
         else if (playerinput.playerState == PlayerInput.PlayerState.POUND || 
                  playerinput.playerState == PlayerInput.PlayerState.FIRSTBOUNCE)
         {
             animator.SetTrigger("roll");
-
         }
         else if(playerinput.playerState == PlayerInput.PlayerState.IDLE)
         {
